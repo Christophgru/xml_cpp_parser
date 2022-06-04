@@ -1,0 +1,3 @@
+C:/Users/chris/OneDrive/Dokumente/DHBW/Programmieren/c_cpp/xmlparser_abgabe/cmake-build-debug/CMakeFiles/xmlparser_abgabe.dir
+C:/Users/chris/OneDrive/Dokumente/DHBW/Programmieren/c_cpp/xmlparser_abgabe/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/chris/OneDrive/Dokumente/DHBW/Programmieren/c_cpp/xmlparser_abgabe/cmake-build-debug/CMakeFiles/rebuild_cache.dir
