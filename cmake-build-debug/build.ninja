@@ -49,11 +49,23 @@ cmake_ninja_workdir = C$:/Users/chris/OneDrive/Dokumente/DHBW/Programmieren/c_cp
 
 build cmake_object_order_depends_target_xmlparser_abgabe: phony || CMakeFiles/xmlparser_abgabe.dir
 
-build CMakeFiles/xmlparser_abgabe.dir/scr/xml_to_cpp_parser.cpp.obj: CXX_COMPILER__xmlparser_abgabe_Debug C$:/Users/chris/OneDrive/Dokumente/DHBW/Programmieren/c_cpp/xmlparser_abgabe/scr/xml_to_cpp_parser.cpp || cmake_object_order_depends_target_xmlparser_abgabe
-  DEP_FILE = CMakeFiles\xmlparser_abgabe.dir\scr\xml_to_cpp_parser.cpp.obj.d
+build CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj: CXX_COMPILER__xmlparser_abgabe_Debug C$:/Users/chris/OneDrive/Dokumente/DHBW/Programmieren/c_cpp/xmlparser_abgabe/scr/main.cpp || cmake_object_order_depends_target_xmlparser_abgabe
+  DEP_FILE = CMakeFiles\xmlparser_abgabe.dir\scr\main.cpp.obj.d
   FLAGS = -g -std=gnu++17
   OBJECT_DIR = CMakeFiles\xmlparser_abgabe.dir
   OBJECT_FILE_DIR = CMakeFiles\xmlparser_abgabe.dir\scr
+
+build CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj: CXX_COMPILER__xmlparser_abgabe_Debug C$:/Users/chris/OneDrive/Dokumente/DHBW/Programmieren/c_cpp/xmlparser_abgabe/scr/XMLparser.cpp || cmake_object_order_depends_target_xmlparser_abgabe
+  DEP_FILE = CMakeFiles\xmlparser_abgabe.dir\scr\XMLparser.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  OBJECT_DIR = CMakeFiles\xmlparser_abgabe.dir
+  OBJECT_FILE_DIR = CMakeFiles\xmlparser_abgabe.dir\scr
+
+build CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj: CXX_COMPILER__xmlparser_abgabe_Debug C$:/Users/chris/OneDrive/Dokumente/DHBW/Programmieren/c_cpp/xmlparser_abgabe/scr/include/filewrite/filewrite.cpp || cmake_object_order_depends_target_xmlparser_abgabe
+  DEP_FILE = CMakeFiles\xmlparser_abgabe.dir\scr\include\filewrite\filewrite.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  OBJECT_DIR = CMakeFiles\xmlparser_abgabe.dir
+  OBJECT_FILE_DIR = CMakeFiles\xmlparser_abgabe.dir\scr\include\filewrite
 
 
 # =============================================================================
@@ -63,7 +75,7 @@ build CMakeFiles/xmlparser_abgabe.dir/scr/xml_to_cpp_parser.cpp.obj: CXX_COMPILE
 #############################################
 # Link the executable xmlparser_abgabe.exe
 
-build xmlparser_abgabe.exe: CXX_EXECUTABLE_LINKER__xmlparser_abgabe_Debug CMakeFiles/xmlparser_abgabe.dir/scr/xml_to_cpp_parser.cpp.obj
+build xmlparser_abgabe.exe: CXX_EXECUTABLE_LINKER__xmlparser_abgabe_Debug CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\xmlparser_abgabe.dir

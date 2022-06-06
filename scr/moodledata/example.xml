@@ -13,7 +13,7 @@
     <ClassName>COptionParser</ClassName>
 
 
-    -<OverAllDescription>
+    <OverAllDescription>
 
     <Block>Erstellt einen Rumpf zum einlesen von Argumente aus der Kommandozeile.</Block>
 
@@ -26,7 +26,7 @@
 </OverAllDescription>
 
 
-    -<SampleUsage>
+    <SampleUsage>
 
     <Sample>getoptgen [options] ... QUELLE</Sample>
 
@@ -35,7 +35,7 @@
 </SampleUsage>
 
 
-    -<Options>
+    <Options>
 
     <!-- Option help greift auf die interne Klasseninterne Methode printHelp zu. Ein gleichzeitiger Aufruf mit version und parse-only ist nicht erlaubt. -->
 

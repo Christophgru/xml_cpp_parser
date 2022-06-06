@@ -1,50 +1,50 @@
 //
 // Created by chris on 6/2/2022.
 //
-#ifndef XMLparser_h_
-#define XMLparser_h_
+#ifndef XMLPARSER_H
+#define XMLPARSER_H
 
 #include <string>
 
-using namespace std;
-
 namespace DHBW {
 
-
+    struct opt {
+        int optIndex;
+        char32_t shortOpt;
+        std::string longOpt;
+        std::initializer_list<uint8_t> exclusions;
+        std::string connectedMethodName;
+        bool hasargs;
+        std::string descriptions;
+    };
+    struct filedata {
+        std::string nameSpaceName;
+        std::string classname;
+        std::string author;
+        std::string telephonenumber;
+        std::string email;
+        std::string headerFileName;
+        std::string sourceFileName;
+        std::initializer_list<std::string> overallDescription;
+        std::initializer_list<std::string> sampleUsage;
+        std::initializer_list<opt> optarr;
+    };
     class XMLparser {
-        struct opt {
-            int optIndex;
-            char32_t shortOpt;
-            string longOpt;
-            initializer_list<uint8_t> exclusions;
-            string connectedMethodName;
-            bool hasargs;
-            string descriptions;
-        };
-        struct filedata {
-            string nameSpaceName;
-            string classname;
-            string author;
-            string telephonenumber;
-            string email;
-            string headerFileName;
-            string sourceFileName;
-            initializer_list<string> overallDescription;
-            initializer_list<string> sampleUsage;
-            initializer_list<opt> optarr;
-        };
-    public:
-        XMLparser();
-        int buildprojectfromxml(int argc, char *argv[]);
-         ~XMLparser();
 
+    public:
+         filedata xmldata;
+         std::string xmlpath;
+
+        XMLparser();
+        ~XMLparser();
+        int buildprojectfromxml(int argc, char *argv[]);
+        void printhelp();
+        void printversion();
     private:
-        filedata thisdata;
-        string xmlpath;
         bool makeCFile();
         bool makeHFile();
         bool getOpts(int argc, char *argv[]);
-        filedata loadXML(string path);
+        filedata loadXML(std::string path);
 
     };
 
