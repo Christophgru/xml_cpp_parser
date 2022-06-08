@@ -56,10 +56,10 @@ RM = "C:\Program Files\JetBrains\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Jonas\CLionProjects\xml_cpp_parser
+CMAKE_SOURCE_DIR = C:\Users\grafy\OneDrive\Dokumente\DHBW\Programmieren\C\Projekte\Abgabe_C
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Jonas\CLionProjects\xml_cpp_parser\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\grafy\OneDrive\Dokumente\DHBW\Programmieren\C\Projekte\Abgabe_C\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Jonas\CLionProjects\xml_cpp_parser\cmake-build-debug\CMakeFiles C:\Users\Jonas\CLionProjects\xml_cpp_parser\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\grafy\OneDrive\Dokumente\DHBW\Programmieren\C\Projekte\Abgabe_C\cmake-build-debug\CMakeFiles C:\Users\grafy\OneDrive\Dokumente\DHBW\Programmieren\C\Projekte\Abgabe_C\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Jonas\CLionProjects\xml_cpp_parser\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\grafy\OneDrive\Dokumente\DHBW\Programmieren\C\Projekte\Abgabe_C\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -152,6 +152,54 @@ scr/XMLparser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.s
 .PHONY : scr/XMLparser.cpp.s
 
+scr/abstractXMLparser.obj: scr/abstractXMLparser.cpp.obj
+.PHONY : scr/abstractXMLparser.obj
+
+# target to build an object file
+scr/abstractXMLparser.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj
+.PHONY : scr/abstractXMLparser.cpp.obj
+
+scr/abstractXMLparser.i: scr/abstractXMLparser.cpp.i
+.PHONY : scr/abstractXMLparser.i
+
+# target to preprocess a source file
+scr/abstractXMLparser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.i
+.PHONY : scr/abstractXMLparser.cpp.i
+
+scr/abstractXMLparser.s: scr/abstractXMLparser.cpp.s
+.PHONY : scr/abstractXMLparser.s
+
+# target to generate assembly for a file
+scr/abstractXMLparser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.s
+.PHONY : scr/abstractXMLparser.cpp.s
+
+scr/include/XMLread/readXML.obj: scr/include/XMLread/readXML.cpp.obj
+.PHONY : scr/include/XMLread/readXML.obj
+
+# target to build an object file
+scr/include/XMLread/readXML.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj
+.PHONY : scr/include/XMLread/readXML.cpp.obj
+
+scr/include/XMLread/readXML.i: scr/include/XMLread/readXML.cpp.i
+.PHONY : scr/include/XMLread/readXML.i
+
+# target to preprocess a source file
+scr/include/XMLread/readXML.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.i
+.PHONY : scr/include/XMLread/readXML.cpp.i
+
+scr/include/XMLread/readXML.s: scr/include/XMLread/readXML.cpp.s
+.PHONY : scr/include/XMLread/readXML.s
+
+# target to generate assembly for a file
+scr/include/XMLread/readXML.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.s
+.PHONY : scr/include/XMLread/readXML.cpp.s
+
 scr/include/filewrite/filewrite.obj: scr/include/filewrite/filewrite.cpp.obj
 .PHONY : scr/include/filewrite/filewrite.obj
 
@@ -212,6 +260,12 @@ help:
 	@echo ... scr/XMLparser.obj
 	@echo ... scr/XMLparser.i
 	@echo ... scr/XMLparser.s
+	@echo ... scr/abstractXMLparser.obj
+	@echo ... scr/abstractXMLparser.i
+	@echo ... scr/abstractXMLparser.s
+	@echo ... scr/include/XMLread/readXML.obj
+	@echo ... scr/include/XMLread/readXML.i
+	@echo ... scr/include/XMLread/readXML.s
 	@echo ... scr/include/filewrite/filewrite.obj
 	@echo ... scr/include/filewrite/filewrite.i
 	@echo ... scr/include/filewrite/filewrite.s
