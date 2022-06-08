@@ -44,9 +44,7 @@ namespace DHBW {
         filedata xmldata;
 
         XMLparser();
-
         ~XMLparser();
-        int main(int argc, char argv);
 
 
     private:
