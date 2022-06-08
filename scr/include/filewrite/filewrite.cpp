@@ -25,7 +25,7 @@ string get_date() {
 }
 
 
-void buildC( DHBW::filedata &xmldata) {
+void buildC(const DHBW::filedata &xmldata) {
     string c_code;
     string path_c = "/../output/code/" + xmldata.cfilename + ".cpp";
 
@@ -41,7 +41,7 @@ void buildC( DHBW::filedata &xmldata) {
     write_data(c_code, path_c);
 };
 
-void buildH(DHBW::filedata &xmldata) {
+void buildH(const DHBW::filedata &xmldata) {
 
     string h_code;
     string path_h = "/../output/header/" + xmldata.hfilename + ".h" + "\n";
