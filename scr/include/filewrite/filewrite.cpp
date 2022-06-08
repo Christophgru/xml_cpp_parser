@@ -25,36 +25,35 @@ string get_date() {
 }
 
 
-bool buildC(DHBW::filedata xmldata) {
+void buildC( DHBW::filedata &xmldata) {
     string c_code;
-    string path_c = "/../output/code/" + xmldata.classname + ".cpp";
+    string path_c = "/../output/code/" + xmldata.cfilename + ".cpp";
 
     //SOF Comment
-    string startcomment = "//This empty method body for the class" + xmldata.classname
+    string startcomment = "//This empty method body for the class" + xmldata.cfilename
                           + " was created by " + xmldata.author + " on " + get_date() + "\n";
     c_code += startcomment;
 
     //includes from hfile
-    c_code += "#include \" ../header/" + xmldata.classname + ".h\" \n";
+    c_code += "#include \" ../header/" + xmldata.cfilename + "\" \n";
 
 
     write_data(c_code, path_c);
-    return false;
 };
 
-bool buildH(DHBW::filedata xmldata) {
+void buildH(DHBW::filedata &xmldata) {
 
     string h_code;
-    string path_h = "/../output/header/" + xmldata.classname + ".h" + "\n";
+    string path_h = "/../output/header/" + xmldata.hfilename + ".h" + "\n";
 
     //SOF Comment
-    string startcomment = "//This empty method body for the class" + xmldata.classname
+    string startcomment = "//This empty method body for the class" + xmldata.hfilename
                           + " was created by " + xmldata.author + " on " + get_date() + "\n\n\n\n";
     h_code += startcomment;
 
     //include Guards
-    h_code += "#ifndef " + xmldata.classname + "_H" + "\n";
-    h_code += "#define" + xmldata.classname + "_H" + "\n\n\n\n";
+    h_code += "#ifndef " + xmldata.hfilename + "_H" + "\n";
+    h_code += "#define" + xmldata.hfilename + "_H" + "\n\n\n\n";
 
     //start namespace
     h_code += "namespace " + xmldata.nameSpaceName + " {" + "\n\n";
@@ -66,12 +65,16 @@ bool buildH(DHBW::filedata xmldata) {
 
     //start class
     h_code += "class" + xmldata.classname + "{" + "\n\n";
-    //build methods
+    //build external method declarations
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        //Kommentar für jede Methode
-        h_code += "//" + data(xmldata.optarr)[i].descriptions + "\n";
-        //Methodendeklaration
-        h_code += "void " + data(xmldata.optarr)[i].connectedMethodName + "();" + "\n\n";
+        if (data(xmldata.optarr)[i].connectedtoExternalMethodName.compare("-") != 0) {
+            //Interne methode wird hier erstellt
+
+            //Kommentar für jede Methode
+            h_code += "//" + data(xmldata.optarr)[i].description + "\n";
+            //Methodendeklaration
+            h_code += "void " + data(xmldata.optarr)[i].connectedtoInternalMethodName + "();" + "\n\n";
+        }
     }
     //klammer zu Klasse
     h_code += "};";
@@ -83,7 +86,6 @@ bool buildH(DHBW::filedata xmldata) {
     h_code += "#endif";
     write_data(h_code, path_h);
 
-    return false;
 }
 
 

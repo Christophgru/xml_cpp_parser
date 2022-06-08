@@ -67,6 +67,12 @@ build CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj: C
   OBJECT_DIR = CMakeFiles\xmlparser_abgabe.dir
   OBJECT_FILE_DIR = CMakeFiles\xmlparser_abgabe.dir\scr\include\filewrite
 
+build CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj: CXX_COMPILER__xmlparser_abgabe_Debug C$:/Users/chris/OneDrive/Dokumente/DHBW/Programmieren/c_cpp/xmlparser_abgabe/scr/abstractXMLparser.cpp || cmake_object_order_depends_target_xmlparser_abgabe
+  DEP_FILE = CMakeFiles\xmlparser_abgabe.dir\scr\abstractXMLparser.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  OBJECT_DIR = CMakeFiles\xmlparser_abgabe.dir
+  OBJECT_FILE_DIR = CMakeFiles\xmlparser_abgabe.dir\scr
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target xmlparser_abgabe
@@ -75,7 +81,7 @@ build CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj: C
 #############################################
 # Link the executable xmlparser_abgabe.exe
 
-build xmlparser_abgabe.exe: CXX_EXECUTABLE_LINKER__xmlparser_abgabe_Debug CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj
+build xmlparser_abgabe.exe: CXX_EXECUTABLE_LINKER__xmlparser_abgabe_Debug CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\xmlparser_abgabe.dir

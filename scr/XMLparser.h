@@ -5,19 +5,27 @@
 #define XMLPARSER_H
 
 #include <string>
+#include "abstractXMLparser.h"
 
 namespace DHBW {
-
+    enum hasArgs {noArgs,optional, required
+    };
     struct opt {
-        int optIndex;
+        int Ref = 0;//standardmäßig 0 wird genutzt für excludes
         char32_t shortOpt;
         std::string longOpt;
-        std::initializer_list<uint8_t> exclusions;
-        std::string connectedMethodName;
-        bool hasargs;
-        std::string descriptions;
+        std::string interface;
+        std::initializer_list<uint8_t> exclusions;//Ref der Opts die nicht mit dieser aufgerufen werden dürfen
+        std::string convertTo; //Datentyp des folgeparameters
+        std::string deafaultValue;
+        std::string connectedtoInternalMethodName="-";
+        std::string connectedtoExternalMethodName="-";
+        hasArgs hasargs=noArgs;
+        std::string description;
     };
     struct filedata {
+        std::string hfilename;
+        std::string cfilename;
         std::string nameSpaceName;
         std::string classname;
         std::string author;
@@ -29,22 +37,24 @@ namespace DHBW {
         std::initializer_list<std::string> sampleUsage;
         std::initializer_list<opt> optarr;
     };
-    class XMLparser {
+
+    class XMLparser :public abstractXMLparser{
 
     public:
-         filedata xmldata;
-         std::string xmlpath;
+        filedata xmldata;
 
         XMLparser();
+
         ~XMLparser();
-        int buildprojectfromxml(int argc, char *argv[]);
-        void printhelp();
-        void printversion();
+        int main(int argc, char argv);
+
+
     private:
-        bool makeCFile();
-        bool makeHFile();
-        bool getOpts(int argc, char *argv[]);
-        filedata loadXML(std::string path);
+        void makeCFile();
+
+        void makeHFile();
+
+        void loadXML(std::string path);
 
     };
 
