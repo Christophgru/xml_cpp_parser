@@ -8,7 +8,7 @@
 #include "abstractXMLparser.h"
 
 namespace DHBW {
-    enum hasArgs {noArgs,optional, required
+    enum hasArgs {no_argument, optional_argument, required_argument
     };
     struct opt {
         int Ref = 0;//standardmäßig 0 wird genutzt für excludes
@@ -20,8 +20,9 @@ namespace DHBW {
         std::string deafaultValue;
         std::string connectedtoInternalMethodName="-";
         std::string connectedtoExternalMethodName="-";
-        hasArgs hasargs=noArgs;
+        hasArgs hasargs=no_argument;
         std::string description;
+        char exclusion_arr[];
     };
     struct filedata {
         std::string hfilename;
