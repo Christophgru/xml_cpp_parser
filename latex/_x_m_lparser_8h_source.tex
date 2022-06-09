@@ -1,0 +1,67 @@
+\hypertarget{_x_m_lparser_8h_source}{}\doxysection{XMLparser.\+h}
+\label{_x_m_lparser_8h_source}\index{scr/XMLparser.h@{scr/XMLparser.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by chris on 6/2/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#ifndef XMLPARSER\_H}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#define XMLPARSER\_H}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}abstractXMLparser.h"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{namespace }DHBW \{}
+\DoxyCodeLine{11     \textcolor{keyword}{enum} hasArgs \{no\_argument, optional\_argument, required\_argument}
+\DoxyCodeLine{12     \};}
+\DoxyCodeLine{13     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_d_h_b_w_1_1opt}{opt}} \{}
+\DoxyCodeLine{14         \textcolor{keywordtype}{int} Ref = 0;\textcolor{comment}{//standardmäßig 0 wird genutzt für excludes}}
+\DoxyCodeLine{15         \textcolor{keywordtype}{char32\_t} shortOpt;}
+\DoxyCodeLine{16         std::string longOpt;}
+\DoxyCodeLine{17         std::string interface;}
+\DoxyCodeLine{18         std::initializer\_list<uint8\_t> exclusions;\textcolor{comment}{//Ref der Opts die nicht mit dieser aufgerufen werden dürfen}}
+\DoxyCodeLine{19         std::string convertTo; \textcolor{comment}{//Datentyp des folgeparameters}}
+\DoxyCodeLine{20         std::string deafaultValue;}
+\DoxyCodeLine{21         std::string connectedtoInternalMethodName=\textcolor{stringliteral}{"{}-\/"{}};}
+\DoxyCodeLine{22         std::string connectedtoExternalMethodName=\textcolor{stringliteral}{"{}-\/"{}};}
+\DoxyCodeLine{23         hasArgs hasargs=no\_argument;}
+\DoxyCodeLine{24         std::string description;}
+\DoxyCodeLine{25         \textcolor{keywordtype}{char} exclusion\_arr[];}
+\DoxyCodeLine{26     \};}
+\DoxyCodeLine{27     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_d_h_b_w_1_1filedata}{filedata}} \{}
+\DoxyCodeLine{28         std::string SignPerLine;}
+\DoxyCodeLine{29         std::string hfilename;}
+\DoxyCodeLine{30         std::string cfilename;}
+\DoxyCodeLine{31         std::string nameSpaceName;}
+\DoxyCodeLine{32         std::string classname;}
+\DoxyCodeLine{33         std::string author;}
+\DoxyCodeLine{34         std::string telephonenumber;}
+\DoxyCodeLine{35         std::string email;}
+\DoxyCodeLine{36         std::initializer\_list<std::string> overallDescription;}
+\DoxyCodeLine{37         std::initializer\_list<std::string> sampleUsage;}
+\DoxyCodeLine{38         std::initializer\_list<opt> optarr;}
+\DoxyCodeLine{39     \};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keyword}{class }\mbox{\hyperlink{class_d_h_b_w_1_1_x_m_lparser}{XMLparser}} :\textcolor{keyword}{public} \mbox{\hyperlink{class_d_h_b_w_1_1abstract_x_m_lparser}{abstractXMLparser}}\{}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{keyword}{public}:}
+\DoxyCodeLine{44         \mbox{\hyperlink{struct_d_h_b_w_1_1filedata}{filedata}} xmldata;}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         \mbox{\hyperlink{class_d_h_b_w_1_1_x_m_lparser}{XMLparser}}();}
+\DoxyCodeLine{47         \mbox{\hyperlink{class_d_h_b_w_1_1_x_m_lparser}{\string~XMLparser}}();}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{keyword}{private}:}
+\DoxyCodeLine{51         \textcolor{keywordtype}{void} makeCFile();}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53         \textcolor{keywordtype}{void} makeHFile();}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55         \textcolor{keywordtype}{void} loadXML(std::string path);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

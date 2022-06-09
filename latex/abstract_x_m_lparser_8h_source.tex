@@ -1,0 +1,34 @@
+\hypertarget{abstract_x_m_lparser_8h_source}{}\doxysection{abstract\+XMLparser.\+h}
+\label{abstract_x_m_lparser_8h_source}\index{scr/abstractXMLparser.h@{scr/abstractXMLparser.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by chris on 6/8/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef XMLPARSER\_ABGABE\_ABSTRACTXMLPARSER\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define XMLPARSER\_ABGABE\_ABSTRACTXMLPARSER\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{namespace }DHBW \{}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     \textcolor{keyword}{class }\mbox{\hyperlink{class_d_h_b_w_1_1abstract_x_m_lparser}{abstractXMLparser}} \{}
+\DoxyCodeLine{13     \textcolor{keyword}{public}:}
+\DoxyCodeLine{14         std::string xmlpath;}
+\DoxyCodeLine{15         \textcolor{keyword}{const} std::string version;}
+\DoxyCodeLine{16         \textcolor{keyword}{const} std::string helptext;}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{keywordtype}{void} getOpts(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}** argv);}
+\DoxyCodeLine{19         \textcolor{keywordtype}{void} printhelp();}
+\DoxyCodeLine{20         \textcolor{keywordtype}{void} printversion();}
+\DoxyCodeLine{21         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} loadXML(std::string path)=0;}
+\DoxyCodeLine{22         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} makeCFile()=0;}
+\DoxyCodeLine{23         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} makeHFile()=0;}
+\DoxyCodeLine{24     \};}
+\DoxyCodeLine{25 \}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//XMLPARSER\_ABGABE\_ABSTRACTXMLPARSER\_H}}
+
+\end{DoxyCode}
