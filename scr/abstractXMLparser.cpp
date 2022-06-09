@@ -34,9 +34,19 @@ void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
 
 
 void DHBW::abstractXMLparser::printhelp() {
+    std::string helptext;
+    helptext = "";
     printf(helptext.data());
 }
 
 void DHBW::abstractXMLparser::printversion() {
-    printf(version.data());
+    printf(getValueOfVersion().data());
+}
+
+std::string DHBW::abstractXMLparser::getValueOfVersion() {
+    return Version;
+}
+
+bool DHBW::abstractXMLparser::isSetVersion() {
+    return !Version.empty();
 }

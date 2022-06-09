@@ -32,6 +32,10 @@ string getnameofenum(DHBW::hasArgs args) {
 };
 
 
+std::string generateHelpstr() {
+    return "";
+}
+
 template<typename _Traits, typename _CharT, typename _Alloc>
 
 
@@ -82,20 +86,43 @@ void buildC(const DHBW::filedata &xmldata) {
     }
     c_code += "default:\nbreak;\n}\n};\n\n\n";
 
-    //internal methods
+
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
         DHBW::opt optx = data(xmldata.optarr)[i];
-        if(optx.connectedtoExternalMethodName!="-"){
-            c_code+="void "+xmldata.nameSpaceName+"::"+xmldata.classname+"::"
-                    +optx.connectedtoExternalMethodName+"()=0;\n\n";
+
+        //generate internal method
+        if (optx.connectedtoInternalMethodName != "-") {
+
+            //internal printhelp methodbody
+            if (optx.connectedtoInternalMethodName == "printHelp") {
+                c_code += "void DHBW::abstractXMLparser::print" + optx.interface + "() {\n";
+                c_code += "helptext=\"" + generateHelpstr() + "\";";
+                c_code += "printf(helptext.data());\n}";
+            }
+
+                //Internal print [...] Method
+            else if (optx.connectedtoInternalMethodName.substr(0, size("print")) == "print") {
+                c_code += "void DHBW::abstractXMLparser::print" + optx.interface + "() {\n";
+                c_code += "printf(" + optx.interface + ".data());\n}";
+            }
         }
-        if(optx.interface!="-"){
-            c_code+=optx.convertTo+" "+xmldata.nameSpaceName+"::"+xmldata.classname+"::get"+optx.longOpt+
-                    "(){\n return "+optx.interface+";\n}\n\n";
-        }
-        if(optx.connectedtoInternalMethodName!="-"){
-            //generate method
-            //if -v or -h printf, sonst idk
+
+        //generate interface getter und bool isSet()
+        if (optx.interface != "-") {
+            if (optx.hasargs != DHBW::noArgs) {
+                //getter
+                c_code += optx.convertTo + " " + xmldata.nameSpaceName + "::" + xmldata.classname + "::getValueOf" +
+                          (optx.longOpt == "-" ? to_string(optx.shortOpt) : optx.longOpt) + "(){\n";
+                if (optx.hasargs != DHBW::optional) {
+                    c_code +=
+                            "if(" + optx.interface + "==" + optx.deafaultValue + "or ){return " + optx.interface + ";}";
+                }
+                c_code += " return " + optx.interface + ";\n}\n\n";
+            }
+            //is set
+            c_code += "bool " + xmldata.nameSpaceName + "::" + xmldata.classname + "::isSet" + optx.interface + "() {\n"
+                                                                                                                "    return !" +
+                      optx.interface + ".empty();\n}";
         }
 
     }
@@ -130,15 +157,20 @@ void buildH(const DHBW::filedata &xmldata) {
     h_code += "class" + xmldata.classname + "{" + "\n\n";
     //build external method declarations
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        if (data(xmldata.optarr)[i].connectedtoExternalMethodName.compare("-") != 0) {
-            //Interne methode wird hier erstellt
-
-            //Kommentar für jede Methode
-            h_code += "//" + data(xmldata.optarr)[i].description + "\n";
-            //Methodendeklaration
-            h_code += "void " + data(xmldata.optarr)[i].connectedtoInternalMethodName + "();" + "\n\n";
+        DHBW::opt optx = data(xmldata.optarr)[i];
+        //generate external methods
+        if (optx.connectedtoExternalMethodName != "-") { //generate externam method
+            h_code += "void " + xmldata.nameSpaceName + "::" + xmldata.classname + "::"
+                      + optx.connectedtoExternalMethodName + "()=0;\n\n";
         }
+        //Interne methode wird hier erstellt
+
+        //Kommentar für jede Methode
+        h_code += "//" + optx.description + "\n";
+        //Methodendeklaration
+        h_code += "void " + optx.connectedtoInternalMethodName + "();" + "\n\n";
     }
+
     //klammer zu Klasse
     h_code += "};";
 

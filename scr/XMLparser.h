@@ -15,7 +15,7 @@ namespace DHBW {
         char32_t shortOpt;
         std::string longOpt="-";
         std::string interface;
-        std::initializer_list<uint8_t> exclusions;//Ref der Opts die nicht mit dieser aufgerufen werden dürfen
+        std::string exclusions;//Ref der Opts die nicht mit dieser aufgerufen werden dürfen
         std::string convertTo; //Datentyp des folgeparameters
         std::string deafaultValue;
         std::string connectedtoInternalMethodName="-";
@@ -24,6 +24,7 @@ namespace DHBW {
         std::string description;
     };
     struct filedata {
+        std::string version;
         std::string hfilename;
         std::string cfilename;
         std::string nameSpaceName;
