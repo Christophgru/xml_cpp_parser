@@ -22,7 +22,6 @@ namespace DHBW {
         std::string connectedtoExternalMethodName="-";
         hasArgs hasargs=no_argument;
         std::string description;
-        char exclusion_arr[];
     };
     struct filedata {
         std::string SignPerLine;
