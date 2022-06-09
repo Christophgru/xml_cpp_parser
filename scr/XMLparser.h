@@ -5,48 +5,56 @@
 #define XMLPARSER_H
 
 #include <string>
-#include <list>
-using namespace std;
+#include "vector"
+#include "abstractXMLparser.h"
 
 namespace DHBW {
-
+    enum hasArgs {
+        no_argument, optional_argument, required_argument
+    };
     struct opt {
-        int optIndex;
-        char32_t shortOpt;
-        string longOpt;
-        initializer_list<uint8_t> exclusions;
-        string connectedMethodName;
-        bool hasargs;
-        string descriptions;
+        int Ref = 0;//standardmäßig 0 wird genutzt für excludes
+        char32_t shortOpt = '-';
+        std::string longOpt;
+        std::string interface;
+        std::vector<uint8_t> exclusions;//Ref der Opts die nicht mit dieser aufgerufen werden dürfen
+        std::string convertTo; //Datentyp des folgeparameters
+        std::string deafaultValue;
+        std::string connectedtoInternalMethodName = "-";
+        std::string connectedtoExternalMethodName = "-";
+        hasArgs hasargs = no_argument;
+        std::string description;
     };
     struct filedata {
-        string nameSpaceName;
-        string classname;
-        string author;
-        string telephonenumber;
-        string email;
-        string headerFileName;
-        string sourceFileName;
-        list<string> overallDescription;
-        list<string> sampleUsage;
-        list<opt> optarr;
+        std::string SignPerLine;
+        std::string hfilename;
+        std::string cfilename;
+        std::string nameSpaceName;
+        std::string classname;
+        std::string author;
+        std::string telephonenumber;
+        std::string email;
+        std::vector<std::string> overallDescription;
+        std::vector<std::string> sampleUsage;
+        std::vector<opt> optarr;
     };
-    class XMLparser {
+
+    class XMLparser : public abstractXMLparser {
 
     public:
-         filedata xmldata;
-         string xmlpath;
+        filedata xmldata;
 
         XMLparser();
+
         ~XMLparser();
-        int buildprojectfromxml(int argc, char *argv[]);
-        void printhelp();
-        void printversion();
+
+
     private:
-        bool makeCFile();
-        bool makeHFile();
-        bool getOpts(int argc, char *argv[]);
-        filedata loadXML(string path);
+        void makeCFile();
+
+        void makeHFile();
+
+        void loadXML(std::string path);
 
     };
 

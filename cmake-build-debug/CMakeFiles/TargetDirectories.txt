@@ -1,3 +1,0 @@
-C:/Users/User/CLionProjects/xml_cpp_parser/cmake-build-debug/CMakeFiles/xmlparser_abgabe.dir
-C:/Users/User/CLionProjects/xml_cpp_parser/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/User/CLionProjects/xml_cpp_parser/cmake-build-debug/CMakeFiles/rebuild_cache.dir
