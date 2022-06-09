@@ -8,19 +8,20 @@
 #include "abstractXMLparser.h"
 
 namespace DHBW {
-    enum hasArgs {no_argument, optional_argument, required_argument
+    enum hasArgs {
+        no_argument, optional_argument, required_argument
     };
     struct opt {
         int Ref = 0;//standardmäßig 0 wird genutzt für excludes
-        char32_t shortOpt;
+        char32_t shortOpt = '-';
         std::string longOpt;
         std::string interface;
         std::initializer_list<uint8_t> exclusions;//Ref der Opts die nicht mit dieser aufgerufen werden dürfen
         std::string convertTo; //Datentyp des folgeparameters
         std::string deafaultValue;
-        std::string connectedtoInternalMethodName="-";
-        std::string connectedtoExternalMethodName="-";
-        hasArgs hasargs=no_argument;
+        std::string connectedtoInternalMethodName = "-";
+        std::string connectedtoExternalMethodName = "-";
+        hasArgs hasargs = no_argument;
         std::string description;
     };
     struct filedata {
@@ -37,12 +38,13 @@ namespace DHBW {
         std::initializer_list<opt> optarr;
     };
 
-    class XMLparser :public abstractXMLparser{
+    class XMLparser : public abstractXMLparser {
 
     public:
         filedata xmldata;
 
         XMLparser();
+
         ~XMLparser();
 
 
