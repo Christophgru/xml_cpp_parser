@@ -5,6 +5,7 @@
 #define XMLPARSER_H
 
 #include <string>
+#include "vector"
 #include "abstractXMLparser.h"
 
 namespace DHBW {
@@ -16,7 +17,7 @@ namespace DHBW {
         char32_t shortOpt = '-';
         std::string longOpt;
         std::string interface;
-        std::initializer_list<uint8_t> exclusions;//Ref der Opts die nicht mit dieser aufgerufen werden dürfen
+        std::vector<uint8_t> exclusions;//Ref der Opts die nicht mit dieser aufgerufen werden dürfen
         std::string convertTo; //Datentyp des folgeparameters
         std::string deafaultValue;
         std::string connectedtoInternalMethodName = "-";
@@ -33,9 +34,9 @@ namespace DHBW {
         std::string author;
         std::string telephonenumber;
         std::string email;
-        std::initializer_list<std::string> overallDescription;
-        std::initializer_list<std::string> sampleUsage;
-        std::initializer_list<opt> optarr;
+        std::vector<std::string> overallDescription;
+        std::vector<std::string> sampleUsage;
+        std::vector<opt> optarr;
     };
 
     class XMLparser : public abstractXMLparser {

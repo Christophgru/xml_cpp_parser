@@ -56,7 +56,7 @@ void buildC(const DHBW::filedata &xmldata) {
 
     //Generiere für alle longopts ein shortopt
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        DHBW::opt optx = data(xmldata.optarr)[i];
+        DHBW::opt optx = xmldata.optarr[i];
         if (optx.longOpt != "-") {
             if (optx.shortOpt == '-') {
                 optx.shortOpt = tolower(optx.longOpt[0]);
@@ -71,7 +71,7 @@ void buildC(const DHBW::filedata &xmldata) {
               "    const struct option longopts[] =\n"
               "            {";
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        DHBW::opt optx = data(xmldata.optarr)[i];
+        DHBW::opt optx = xmldata.optarr[i];
         if (optx.longOpt != "-") {
             c_code += "{\"" + optx.longOpt +
                       "\", " + getnameofenum(optx.hasargs) +
@@ -89,12 +89,12 @@ void buildC(const DHBW::filedata &xmldata) {
     //create string with first letters
     string firstletter;
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        firstletter += data(xmldata.optarr)[i].shortOpt;
+        firstletter += xmldata.optarr[i].shortOpt;
     }
     c_code += "while ((i = getopt_long(argc, argv, \"" + firstletter + "\", longopts, &optindex)) >=0)\n" +
               "switch(i){\n";
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        DHBW::opt optx = data(xmldata.optarr)[i];
+        DHBW::opt optx = xmldata.optarr[i];
         c_code += "\ncase \'" + to_string(optx.shortOpt) + "\':\n";
         c_code += to_string(optx.shortOpt) + "_flag =true;";
     }
@@ -104,14 +104,14 @@ void buildC(const DHBW::filedata &xmldata) {
 
 //exceptioncheck&methoden aufruf
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        DHBW::opt optx = data(xmldata.optarr)[i];
+        DHBW::opt optx = xmldata.optarr[i];
         c_code += "if(" + to_string(optx.shortOpt) + "){\n";
         if (optx.exclusions.size() > 0) {
             c_code += "if(";
             for (int j = 0; j < optx.exclusions.size(); ++j) {
                 for (int k = 0; k < xmldata.optarr.size(); ++k) {
-                    DHBW::opt opty = data(xmldata.optarr)[i];
-                    if (data(optx.exclusions)[j] == opty.Ref) {
+                    DHBW::opt opty = xmldata.optarr[i];
+                    if (optx.exclusions[j] == opty.Ref) {
                         c_code += to_string(opty.shortOpt) + "_flag ||";
                     }
                 }
@@ -131,7 +131,7 @@ void buildC(const DHBW::filedata &xmldata) {
 
 //Methoden
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        DHBW::opt optx = data(xmldata.optarr)[i];
+        DHBW::opt optx = xmldata.optarr[i];
 
         //generate internal method
         if (optx.connectedtoInternalMethodName != "-") {
@@ -195,7 +195,7 @@ void buildH(const DHBW::filedata &xmldata) {
 
     //Klassenbeschreibung
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        h_code += "//" + data(xmldata.overallDescription)[i] + "\n";
+        h_code += "//" + xmldata.overallDescription[i] + "\n";
     }
 
     //start class
@@ -203,7 +203,7 @@ void buildH(const DHBW::filedata &xmldata) {
 
     //build interfaces
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        DHBW::opt optx = data(xmldata.optarr)[i];
+        DHBW::opt optx = xmldata.optarr[i];
         if (!optx.interface.empty()){
             h_code+=(optx.convertTo.empty()?"void":optx.convertTo)+" "+optx.interface+";\n";
         }
@@ -211,7 +211,7 @@ void buildH(const DHBW::filedata &xmldata) {
 
     //build external method declarations
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        DHBW::opt optx = data(xmldata.optarr)[i];
+        DHBW::opt optx = xmldata.optarr[i];
 
         //generate internal methods
         //Kommentar für jede Methode
