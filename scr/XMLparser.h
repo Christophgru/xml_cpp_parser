@@ -5,35 +5,37 @@
 #define XMLPARSER_H
 
 #include <string>
+#include <list>
+using namespace std;
 
 namespace DHBW {
 
     struct opt {
         int optIndex;
         char32_t shortOpt;
-        std::string longOpt;
-        std::initializer_list<uint8_t> exclusions;
-        std::string connectedMethodName;
+        string longOpt;
+        initializer_list<uint8_t> exclusions;
+        string connectedMethodName;
         bool hasargs;
-        std::string descriptions;
+        string descriptions;
     };
     struct filedata {
-        std::string nameSpaceName;
-        std::string classname;
-        std::string author;
-        std::string telephonenumber;
-        std::string email;
-        std::string headerFileName;
-        std::string sourceFileName;
-        std::initializer_list<std::string> overallDescription;
-        std::initializer_list<std::string> sampleUsage;
-        std::initializer_list<opt> optarr;
+        string nameSpaceName;
+        string classname;
+        string author;
+        string telephonenumber;
+        string email;
+        string headerFileName;
+        string sourceFileName;
+        list<string> overallDescription;
+        list<string> sampleUsage;
+        list<opt> optarr;
     };
     class XMLparser {
 
     public:
          filedata xmldata;
-         std::string xmlpath;
+         string xmlpath;
 
         XMLparser();
         ~XMLparser();
@@ -44,7 +46,7 @@ namespace DHBW {
         bool makeCFile();
         bool makeHFile();
         bool getOpts(int argc, char *argv[]);
-        filedata loadXML(std::string path);
+        filedata loadXML(string path);
 
     };
 
