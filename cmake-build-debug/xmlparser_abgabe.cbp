@@ -11,10 +11,10 @@
 				<Option working_dir="C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="xmlparser_abgabe">
@@ -34,10 +34,10 @@
 					<Add directory="/mingw/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 xmlparser_abgabe"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 xmlparser_abgabe"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="xmlparser_abgabe/fast">
@@ -57,30 +57,30 @@
 					<Add directory="/mingw/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 xmlparser_abgabe/fast"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 xmlparser_abgabe/fast"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
 				<Option working_dir="C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
 				<Option working_dir="C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/ninja/win/ninja.exe -f &quot;C:/Users/Jonas/CLionProjects/xml_cpp_parser/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
@@ -88,6 +88,12 @@
 			<Option target="xmlparser_abgabe"/>
 		</Unit>
 		<Unit filename="C:/Users/Jonas/CLionProjects/xml_cpp_parser/scr/XMLparser.h">
+			<Option target="xmlparser_abgabe"/>
+		</Unit>
+		<Unit filename="C:/Users/Jonas/CLionProjects/xml_cpp_parser/scr/abstractXMLparser.cpp">
+			<Option target="xmlparser_abgabe"/>
+		</Unit>
+		<Unit filename="C:/Users/Jonas/CLionProjects/xml_cpp_parser/scr/abstractXMLparser.h">
 			<Option target="xmlparser_abgabe"/>
 		</Unit>
 		<Unit filename="C:/Users/Jonas/CLionProjects/xml_cpp_parser/scr/include/filewrite/filewrite.cpp">

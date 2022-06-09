@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj"
   "CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj.d"
+  "CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj"
+  "CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj.d"
   "CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj"
   "CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj.d"
   "CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj"
