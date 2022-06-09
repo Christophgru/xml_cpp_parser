@@ -27,9 +27,10 @@ string get_date() {
 
 string getnameofenum(DHBW::hasArgs args) {
 
-    if (args == DHBW::required) { return "required_argument"; }
-    else if (args == DHBW::optional) { return "optional_argument"; }
+    if (args == DHBW::required_argument) { return "required_argument"; }
+    else if (args == DHBW::optional_argument) { return "optional_argument"; }
     else { return "no_argument"; }
+}
 
 
 void buildC(const DHBW::filedata &xmldata) {
