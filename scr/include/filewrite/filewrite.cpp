@@ -25,6 +25,13 @@ string get_date() {
 }
 
 
+string getnameofenum(DHBW::hasArgs args) {
+
+    if (args == DHBW::required) { return "required_argument"; }
+    else if (args == DHBW::optional) { return "optional_argument"; }
+    else { return "no_argument"; }
+
+
 void buildC(const DHBW::filedata &xmldata) {
     string c_code;
     string path_c = "/../output/code/" + xmldata.cfilename + ".cpp";
