@@ -9,7 +9,6 @@
 #include <xercesc/util/OutOfMemoryException.hpp>
 XERCES_CPP_NAMESPACE_USE
 
-#include "../../XMLparser.h"
 #include <locale>
 #include <codecvt>
 #include <string>
@@ -65,16 +64,16 @@ private:
             if(value[i] != ',')options.exclusions.push_back(value[i]);
         }
     }
-    void setStruct(string start, string key, string value)
+    void setStruct(string startelement, string key, string value)
     {
-        if(start == "Author")
+        if(startelement == "Author")
         {
             if(key == "Name")data.author = value;
             else if(key == "Phone")data.telephonenumber = value;
             else if(key =="Mail")data.email = value;
         }
-        else if(start=="GetOptSetup") data.SignPerLine = value;
-        else if(start == "Option")
+        else if(startelement =="GetOptSetup") data.SignPerLine = value;
+        else if(startelement == "Option")
         {
             if(key == "Ref")options.Ref = stoi(value);
             else if(key == "ShortOpt")options.shortOpt = value.at(0);
@@ -91,15 +90,15 @@ private:
         //cout << key << ": " << value << endl;
     }
 
-    void setStruct(string start, string value)
+    void setStruct(string startelement, string value)
     {
         if(value != "\n\t" && value != "\n\t\t") {
-            if(start == "HeaderFileName")data.hfilename = value;
-            else if(start == "SourceFileName")data.cfilename = value;
-            else if(start == "NameSpace")data.nameSpaceName = value;
-            else if(start == "ClassName")data.classname = value;
-            else if(start== "Block")data.overallDescription.push_back(value);
-            else if(start == "Sample")data.sampleUsage.push_back(value);
+            if(startelement == "HeaderFileName")data.hfilename = value;
+            else if(startelement == "SourceFileName")data.cfilename = value;
+            else if(startelement == "NameSpace")data.nameSpaceName = value;
+            else if(startelement == "ClassName")data.classname = value;
+            else if(startelement == "Block")data.overallDescription.push_back(value);
+            else if(startelement == "Sample")data.sampleUsage.push_back(value);
 
         }
         //cout << value << endl;
@@ -123,7 +122,6 @@ void readXML(std::string path, DHBW::filedata data){
         parser = new SAXParser;
 
         int errorCount = {0};
-
         try
         {
             //Das eigentliche Parsen der Datei

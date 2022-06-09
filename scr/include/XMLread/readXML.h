@@ -9,5 +9,4 @@
 
 void readXML(std::string path, DHBW::filedata tofill);
 
-
 #endif //XMLPARSER_ABGABE_RADXML_H
