@@ -22,9 +22,9 @@ namespace DHBW {
         std::string connectedtoExternalMethodName="-";
         hasArgs hasargs=no_argument;
         std::string description;
-        char exclusion_arr[];
     };
     struct filedata {
+        std::string SignPerLine;
         std::string hfilename;
         std::string cfilename;
         std::string nameSpaceName;
@@ -32,8 +32,6 @@ namespace DHBW {
         std::string author;
         std::string telephonenumber;
         std::string email;
-        std::string headerFileName;
-        std::string sourceFileName;
         std::initializer_list<std::string> overallDescription;
         std::initializer_list<std::string> sampleUsage;
         std::initializer_list<opt> optarr;
