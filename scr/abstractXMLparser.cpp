@@ -20,7 +20,7 @@ void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
     const struct option longopts[] =
             {
                     {"help",    no_argument, nullptr, 'h'},
-                    // Stichwort für lange Option, Argument (no_argument, optional_argument, required_argument), flag(?), reference auf Buchstaben
+                    // Stichwort für lange Option, Argument (no_argument, optional_argument, required_argument), flag(?), Reference auf Buchstaben
                     {"version", no_argument, nullptr, 'v'},
                     {"date",    no_argument, nullptr, 'd'}
             };
