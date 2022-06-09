@@ -36,7 +36,7 @@ std::string generateHelpstr() {
     return "";
 }
 
-template<typename _Traits, typename _CharT, typename _Alloc>
+
 
 
 void buildC(const DHBW::filedata &xmldata) {
