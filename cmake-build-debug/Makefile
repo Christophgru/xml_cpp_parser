@@ -152,6 +152,54 @@ scr/XMLparser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.s
 .PHONY : scr/XMLparser.cpp.s
 
+scr/abstractXMLparser.obj: scr/abstractXMLparser.cpp.obj
+.PHONY : scr/abstractXMLparser.obj
+
+# target to build an object file
+scr/abstractXMLparser.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj
+.PHONY : scr/abstractXMLparser.cpp.obj
+
+scr/abstractXMLparser.i: scr/abstractXMLparser.cpp.i
+.PHONY : scr/abstractXMLparser.i
+
+# target to preprocess a source file
+scr/abstractXMLparser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.i
+.PHONY : scr/abstractXMLparser.cpp.i
+
+scr/abstractXMLparser.s: scr/abstractXMLparser.cpp.s
+.PHONY : scr/abstractXMLparser.s
+
+# target to generate assembly for a file
+scr/abstractXMLparser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.s
+.PHONY : scr/abstractXMLparser.cpp.s
+
+scr/include/XMLread/readXML.obj: scr/include/XMLread/readXML.cpp.obj
+.PHONY : scr/include/XMLread/readXML.obj
+
+# target to build an object file
+scr/include/XMLread/readXML.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj
+.PHONY : scr/include/XMLread/readXML.cpp.obj
+
+scr/include/XMLread/readXML.i: scr/include/XMLread/readXML.cpp.i
+.PHONY : scr/include/XMLread/readXML.i
+
+# target to preprocess a source file
+scr/include/XMLread/readXML.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.i
+.PHONY : scr/include/XMLread/readXML.cpp.i
+
+scr/include/XMLread/readXML.s: scr/include/XMLread/readXML.cpp.s
+.PHONY : scr/include/XMLread/readXML.s
+
+# target to generate assembly for a file
+scr/include/XMLread/readXML.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\xmlparser_abgabe.dir\build.make CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.s
+.PHONY : scr/include/XMLread/readXML.cpp.s
+
 scr/include/filewrite/filewrite.obj: scr/include/filewrite/filewrite.cpp.obj
 .PHONY : scr/include/filewrite/filewrite.obj
 
@@ -212,6 +260,12 @@ help:
 	@echo ... scr/XMLparser.obj
 	@echo ... scr/XMLparser.i
 	@echo ... scr/XMLparser.s
+	@echo ... scr/abstractXMLparser.obj
+	@echo ... scr/abstractXMLparser.i
+	@echo ... scr/abstractXMLparser.s
+	@echo ... scr/include/XMLread/readXML.obj
+	@echo ... scr/include/XMLread/readXML.i
+	@echo ... scr/include/XMLread/readXML.s
 	@echo ... scr/include/filewrite/filewrite.obj
 	@echo ... scr/include/filewrite/filewrite.i
 	@echo ... scr/include/filewrite/filewrite.s

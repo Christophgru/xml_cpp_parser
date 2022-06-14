@@ -69,6 +69,7 @@ include CMakeFiles/xmlparser_abgabe.dir/progress.make
 include CMakeFiles/xmlparser_abgabe.dir/flags.make
 
 CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/flags.make
+CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/includes_CXX.rsp
 CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj: ../scr/main.cpp
 CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\User\CLionProjects\xml_cpp_parser\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj"
@@ -83,6 +84,7 @@ CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.s: cmake_force
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\User\CLionProjects\xml_cpp_parser\scr\main.cpp -o CMakeFiles\xmlparser_abgabe.dir\scr\main.cpp.s
 
 CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/flags.make
+CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/includes_CXX.rsp
 CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj: ../scr/XMLparser.cpp
 CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\User\CLionProjects\xml_cpp_parser\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj"
@@ -97,6 +99,7 @@ CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.s: cmake_force
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\User\CLionProjects\xml_cpp_parser\scr\XMLparser.cpp -o CMakeFiles\xmlparser_abgabe.dir\scr\XMLparser.cpp.s
 
 CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/flags.make
+CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/includes_CXX.rsp
 CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj: ../scr/include/filewrite/filewrite.cpp
 CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\User\CLionProjects\xml_cpp_parser\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj"
@@ -110,11 +113,43 @@ CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.s: cmake_for
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.s"
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\User\CLionProjects\xml_cpp_parser\scr\include\filewrite\filewrite.cpp -o CMakeFiles\xmlparser_abgabe.dir\scr\include\filewrite\filewrite.cpp.s
 
+CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/flags.make
+CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/includes_CXX.rsp
+CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj: ../scr/abstractXMLparser.cpp
+CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\User\CLionProjects\xml_cpp_parser\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj -MF CMakeFiles\xmlparser_abgabe.dir\scr\abstractXMLparser.cpp.obj.d -o CMakeFiles\xmlparser_abgabe.dir\scr\abstractXMLparser.cpp.obj -c C:\Users\User\CLionProjects\xml_cpp_parser\scr\abstractXMLparser.cpp
+
+CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.i"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\User\CLionProjects\xml_cpp_parser\scr\abstractXMLparser.cpp > CMakeFiles\xmlparser_abgabe.dir\scr\abstractXMLparser.cpp.i
+
+CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.s"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\User\CLionProjects\xml_cpp_parser\scr\abstractXMLparser.cpp -o CMakeFiles\xmlparser_abgabe.dir\scr\abstractXMLparser.cpp.s
+
+CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/flags.make
+CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/includes_CXX.rsp
+CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj: ../scr/include/XMLread/readXML.cpp
+CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj: CMakeFiles/xmlparser_abgabe.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\User\CLionProjects\xml_cpp_parser\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj -MF CMakeFiles\xmlparser_abgabe.dir\scr\include\XMLread\readXML.cpp.obj.d -o CMakeFiles\xmlparser_abgabe.dir\scr\include\XMLread\readXML.cpp.obj -c C:\Users\User\CLionProjects\xml_cpp_parser\scr\include\XMLread\readXML.cpp
+
+CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.i"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\User\CLionProjects\xml_cpp_parser\scr\include\XMLread\readXML.cpp > CMakeFiles\xmlparser_abgabe.dir\scr\include\XMLread\readXML.cpp.i
+
+CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.s"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\User\CLionProjects\xml_cpp_parser\scr\include\XMLread\readXML.cpp -o CMakeFiles\xmlparser_abgabe.dir\scr\include\XMLread\readXML.cpp.s
+
 # Object files for target xmlparser_abgabe
 xmlparser_abgabe_OBJECTS = \
 "CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj" \
 "CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj" \
-"CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj"
+"CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj" \
+"CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj" \
+"CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj"
 
 # External object files for target xmlparser_abgabe
 xmlparser_abgabe_EXTERNAL_OBJECTS =
@@ -122,11 +157,14 @@ xmlparser_abgabe_EXTERNAL_OBJECTS =
 xmlparser_abgabe.exe: CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj
 xmlparser_abgabe.exe: CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj
 xmlparser_abgabe.exe: CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj
+xmlparser_abgabe.exe: CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj
+xmlparser_abgabe.exe: CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj
 xmlparser_abgabe.exe: CMakeFiles/xmlparser_abgabe.dir/build.make
+xmlparser_abgabe.exe: C:/MinGW/lib/libxerces-c.dll.a
 xmlparser_abgabe.exe: CMakeFiles/xmlparser_abgabe.dir/linklibs.rsp
 xmlparser_abgabe.exe: CMakeFiles/xmlparser_abgabe.dir/objects1.rsp
 xmlparser_abgabe.exe: CMakeFiles/xmlparser_abgabe.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\User\CLionProjects\xml_cpp_parser\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable xmlparser_abgabe.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\User\CLionProjects\xml_cpp_parser\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable xmlparser_abgabe.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\xmlparser_abgabe.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

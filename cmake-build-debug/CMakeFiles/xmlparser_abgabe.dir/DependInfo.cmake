@@ -9,6 +9,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/User/CLionProjects/xml_cpp_parser/scr/XMLparser.cpp" "CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj" "gcc" "CMakeFiles/xmlparser_abgabe.dir/scr/XMLparser.cpp.obj.d"
+  "C:/Users/User/CLionProjects/xml_cpp_parser/scr/abstractXMLparser.cpp" "CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj" "gcc" "CMakeFiles/xmlparser_abgabe.dir/scr/abstractXMLparser.cpp.obj.d"
+  "C:/Users/User/CLionProjects/xml_cpp_parser/scr/include/XMLread/readXML.cpp" "CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj" "gcc" "CMakeFiles/xmlparser_abgabe.dir/scr/include/XMLread/readXML.cpp.obj.d"
   "C:/Users/User/CLionProjects/xml_cpp_parser/scr/include/filewrite/filewrite.cpp" "CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj" "gcc" "CMakeFiles/xmlparser_abgabe.dir/scr/include/filewrite/filewrite.cpp.obj.d"
   "C:/Users/User/CLionProjects/xml_cpp_parser/scr/main.cpp" "CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj" "gcc" "CMakeFiles/xmlparser_abgabe.dir/scr/main.cpp.obj.d"
   )

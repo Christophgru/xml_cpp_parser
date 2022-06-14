@@ -24,6 +24,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="C:/MinGW/include"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
@@ -45,6 +46,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="C:/MinGW/include"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/x86_64-w64-mingw32"/>
 					<Add directory="c:\mingw\bin\../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include/c++/11.2.0/backward"/>
@@ -84,6 +86,18 @@
 			<Option target="xmlparser_abgabe"/>
 		</Unit>
 		<Unit filename="C:/Users/User/CLionProjects/xml_cpp_parser/scr/XMLparser.h">
+			<Option target="xmlparser_abgabe"/>
+		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/xml_cpp_parser/scr/abstractXMLparser.cpp">
+			<Option target="xmlparser_abgabe"/>
+		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/xml_cpp_parser/scr/abstractXMLparser.h">
+			<Option target="xmlparser_abgabe"/>
+		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/xml_cpp_parser/scr/include/XMLread/readXML.cpp">
+			<Option target="xmlparser_abgabe"/>
+		</Unit>
+		<Unit filename="C:/Users/User/CLionProjects/xml_cpp_parser/scr/include/XMLread/readXML.h">
 			<Option target="xmlparser_abgabe"/>
 		</Unit>
 		<Unit filename="C:/Users/User/CLionProjects/xml_cpp_parser/scr/include/filewrite/filewrite.cpp">
