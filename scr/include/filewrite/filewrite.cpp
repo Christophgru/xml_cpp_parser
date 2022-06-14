@@ -32,11 +32,31 @@ string getnameofenum(DHBW::hasArgs args) {
 };
 
 
-std::string generateHelpstr() {
-    return "";
+std::string generateHelpstr(const DHBW::filedata &xmldata) {
+    string hilfetext;
+    hilfetext += "Overall Description:\n";
+    for (int i = 0; i < xmldata.overallDescription.size(); ++i) {
+        hilfetext += data(xmldata.overallDescription)[1];
+        hilfetext += "\n";
+    }
+    hilfetext += "\nSample Usage:\n";
+
+    for (int i = 0; i < xmldata.sampleUsage.size(); ++i) {
+        hilfetext += data(xmldata.sampleUsage)[i];
+        hilfetext += "\n";
+    }
+    hilfetext += "\nOptions:\n";
+
+    for (int i = 0; i < xmldata.optarr.size(); ++i) {
+        DHBW::opt optx = data(xmldata.optarr)[i];
+        hilfetext+="ShortOpt: ";
+        hilfetext += to_string(optx.shortOpt).empty() ? "Keine ShortOpt " : to_string(optx.shortOpt);
+        hilfetext+="LongOpt: ";
+        hilfetext += optx.longOpt.empty() ? "Keine LongOpt " : optx.longOpt;
+        hilfetext+="Description: "+optx.description;
+    }
+    hilfetext+="\nKontaktdaten:\nAutoren: "+xmldata.author+" Email: "+xmldata.email;
 }
-
-
 
 
 void buildC(const DHBW::filedata &xmldata) {
@@ -96,7 +116,7 @@ void buildC(const DHBW::filedata &xmldata) {
             //internal printhelp methodbody
             if (optx.connectedtoInternalMethodName == "printHelp") {
                 c_code += "void DHBW::abstractXMLparser::print" + optx.interface + "() {\n";
-                c_code += "helptext=\"" + generateHelpstr() + "\";";
+                c_code += "helptext=\"" + generateHelpstr(xmldata) + "\";";
                 c_code += "printf(helptext.data());\n}";
             }
 
