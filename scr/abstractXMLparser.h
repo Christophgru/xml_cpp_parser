@@ -12,7 +12,7 @@ namespace DHBW {
     class abstractXMLparser {
     public:
         std::string xmlpath;
-        const std::string version;
+        const std::string version="1.1.2.4a/c";
         const std::string helptext;
 
         void getOpts(int argc, char** argv);
@@ -21,6 +21,7 @@ namespace DHBW {
         virtual void loadXML(std::string path)=0;
         virtual void makeCFile()=0;
         virtual void makeHFile()=0;
+        virtual void generate()=0;
     };
 }
 
