@@ -7,6 +7,7 @@
 #include <string>
 #include "vector"
 #include "abstractXMLparser.h"
+
 using namespace std;
 
 namespace DHBW {
@@ -51,13 +52,7 @@ namespace DHBW {
 
 
     private:
-        void makeCFile();
-
-        void makeHFile();
-
-        void loadXML(string path);
-
-        void generate();
+        void generate(string path);
     };
 
 }
