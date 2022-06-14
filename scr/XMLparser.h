@@ -56,6 +56,7 @@ namespace DHBW {
 
         void loadXML(std::string path);
 
+        void generate();
     };
 
 }
