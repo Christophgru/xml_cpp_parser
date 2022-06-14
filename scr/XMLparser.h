@@ -57,6 +57,7 @@ namespace DHBW {
 
         void loadXML(string path);
 
+        void generate();
     };
 
 }

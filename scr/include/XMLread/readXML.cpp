@@ -127,7 +127,7 @@ void readXML(std::string path, DHBW::filedata data){
             //Das eigentliche Parsen der Datei
             SimpleSAXParser handler;
             parser->setDocumentHandler(&handler);
-            parser->parse("path");
+            parser->parse("C:\\Users\\chris\\OneDrive\\Dokumente\\DHBW\\Programmieren\\c_cpp\\xml_cpp_parser(1)\\xml_src\\example.xml");
             errorCount = parser->getErrorCount();
             data = handler.data;
         }

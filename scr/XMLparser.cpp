@@ -24,6 +24,11 @@ void DHBW::XMLparser::makeHFile() {
     buildH(xmldata);
 
 }
+void DHBW::XMLparser::generate() {
+    loadXML("example.xml");
+    makeHFile();
+    makeCFile();
+}
 
 void DHBW::XMLparser::makeCFile() {
     buildC(xmldata);

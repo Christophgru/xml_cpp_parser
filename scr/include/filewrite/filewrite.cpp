@@ -1,6 +1,7 @@
 //
 // Created by chris on 6/2/2022.
 //
+#include <ctime>
 #include "../../XMLparser.h"
 
 using namespace std;
