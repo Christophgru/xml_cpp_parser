@@ -17,15 +17,15 @@ void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
     bool v_flag;
     bool d_flag;
     bool g_flag;
-    g_flag=h_flag=v_flag=d_flag=false;
+    g_flag = h_flag = v_flag = d_flag = false;
 
     const struct option longopts[] =
             {
-                    {"help",    no_argument, nullptr, 'h'},
+                    {"help",     no_argument, nullptr, 'h'},
                     // Stichwort für lange Option, Argument (no_argument, optional_argument, required_argument), flag(?), Reference auf Buchstaben
-                    {"version", no_argument, nullptr, 'v'},
-                    {"date",    no_argument, nullptr, 'd'},
-                    {"generate",no_argument, nullptr,'g'}
+                    {"version",  no_argument, nullptr, 'v'},
+                    {"date",     no_argument, nullptr, 'd'},
+                    {"generate", no_argument, nullptr, 'g'}
             };
 
     while ((i = getopt_long(argc, argv, "hvdg", longopts, &optindex)) >= 0) {
@@ -41,7 +41,7 @@ void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
                 d_flag = true;
                 break;
             case 'g':
-                g_flag=true;
+                g_flag = true;
             default:
                 break;
         }
@@ -71,7 +71,8 @@ void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
         } else {/*do sth*/}
     }
     if (g_flag) {
-       generate();
+        string path(optarg);
+        generate(path);
     }
 }
 
@@ -80,5 +81,5 @@ void DHBW::abstractXMLparser::printhelp() {
 }
 
 void DHBW::abstractXMLparser::printversion() {
-    cout <<"Current version: "<< version.data() << endl;
+    cout << "Current version: " << version.data() << endl;
 }
