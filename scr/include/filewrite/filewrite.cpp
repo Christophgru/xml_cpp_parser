@@ -1,7 +1,6 @@
 //
 // Created by chris on 6/2/2022.
 //
-#include <ctime>
 #include "../../XMLparser.h"
 
 using namespace std;
@@ -33,8 +32,30 @@ string getnameofenum(DHBW::hasArgs args) {
 };
 
 
-std::string generateHelpstr() {
-    return "";
+std::string generateHelpstr(const DHBW::filedata &xmldata) {
+    string hilfetext;
+    hilfetext += "Overall Description:\n";
+    for (int i = 0; i < xmldata.overallDescription.size(); ++i) {
+        hilfetext += data(xmldata.overallDescription)[1];
+        hilfetext += "\n";
+    }
+    hilfetext += "\nSample Usage:\n";
+
+    for (int i = 0; i < xmldata.sampleUsage.size(); ++i) {
+        hilfetext += data(xmldata.sampleUsage)[i];
+        hilfetext += "\n";
+    }
+    hilfetext += "\nOptions:\n";
+
+    for (int i = 0; i < xmldata.optarr.size(); ++i) {
+        DHBW::opt optx = data(xmldata.optarr)[i];
+        hilfetext+="ShortOpt: ";
+        hilfetext += to_string(optx.shortOpt).empty() ? "Keine ShortOpt " : to_string(optx.shortOpt);
+        hilfetext+="LongOpt: ";
+        hilfetext += optx.longOpt.empty() ? "Keine LongOpt " : optx.longOpt;
+        hilfetext+="Description: "+optx.description;
+    }
+    hilfetext+="\nKontaktdaten:\nAutoren: "+xmldata.author+" Email: "+xmldata.email;
 }
 
 
@@ -128,6 +149,7 @@ void buildC(const DHBW::filedata &xmldata) {
         } else { c_code += optx.connectedtoExternalMethodName; }
         c_code += "();\n";
     }
+    c_code += "default:\nbreak;\n}\n};\n\n\n";
 
 
 //Methoden
@@ -140,7 +162,7 @@ void buildC(const DHBW::filedata &xmldata) {
             //internal printhelp methodbody
             if (optx.connectedtoInternalMethodName == "printHelp") {
                 c_code += "void DHBW::abstractXMLparser::print" + optx.interface + "() {\n";
-                c_code += "helptext=\"" + generateHelpstr() + "\";";
+                c_code += "helptext=\"" + generateHelpstr(xmldata) + "\";";
                 c_code += "printf(helptext.data());\n}";
             }
 
@@ -227,6 +249,12 @@ void buildH(const DHBW::filedata &xmldata) {
             h_code += "void " + xmldata.nameSpaceName + "::" + xmldata.classname + "::"
                       + optx.connectedtoExternalMethodName + "()=0;\n\n";
         }
+        //Interne methode wird hier erstellt
+
+        //Kommentar für jede Methode
+        h_code += "//" + optx.description + "\n";
+        //Methodendeklaration
+        h_code += "void " + optx.connectedtoInternalMethodName + "();" + "\n\n";
     }
 
     //klammer zu Klasse
