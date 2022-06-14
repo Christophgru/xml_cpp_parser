@@ -10,3 +10,7 @@ add_executable(xmlparser_abgabe
         scr/abstractXMLparser.cpp
         scr/include/XMLread/readXML.cpp
         )
+
+include(FindXercesC)
+find_package(XercesC REQUIRED)
+target_link_libraries(xmlparser_abgabe XercesC::XercesC)
