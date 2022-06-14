@@ -57,14 +57,14 @@ private:
 
     opt options;
     wstring_convert<codecvt_utf8_utf16<char16_t>,char16_t> converter{};
-    void getExclusions(string value)
+    void getExclusions(const string& value)
     {
-        for(int i=0 ; i< value.length(); i++)
+        for(char i : value)
         {
-            if(value[i] != ',')options.exclusions.push_back(value[i]);
+            if(i != ',')options.exclusions.push_back(i);
         }
     }
-    void setStruct(string startelement, string key, string value)
+    void setStruct(const string& startelement, const string& key, string value)
     {
         if(startelement == "Author")
         {
@@ -90,9 +90,9 @@ private:
         //cout << key << ": " << value << endl;
     }
 
-    void setStruct(string startelement, string value)
+    void setStruct(const string& startelement, const string& value)
     {
-        if(value != "\n\t" && value != "\n\t\t") {
+        if(value != "\n\n    " && value != "\n\n\n    ") {
             if(startelement == "HeaderFileName")data.hfilename = value;
             else if(startelement == "SourceFileName")data.cfilename = value;
             else if(startelement == "NameSpace")data.nameSpaceName = value;
@@ -104,10 +104,10 @@ private:
         //cout << value << endl;
     }
 };
-void readXML(std::string path, DHBW::filedata data){
+void readXML(const string& path, DHBW::filedata& tofill){
     //read XML stuff from path here
     //and put into tofill like that
-
+        const char *charpath = path.c_str();
         try {
             XMLPlatformUtils::Initialize();
         }
@@ -127,9 +127,9 @@ void readXML(std::string path, DHBW::filedata data){
             //Das eigentliche Parsen der Datei
             SimpleSAXParser handler;
             parser->setDocumentHandler(&handler);
-            parser->parse("C:\\Users\\chris\\OneDrive\\Dokumente\\DHBW\\Programmieren\\c_cpp\\xml_cpp_parser(1)\\xml_src\\example.xml");
+            parser->parse(charpath);
             errorCount = parser->getErrorCount();
-            data = handler.data;
+            tofill = handler.data;
         }
         catch (const OutOfMemoryException&)
         {
