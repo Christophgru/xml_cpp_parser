@@ -44,10 +44,10 @@ Computing class inheritance relations...
 Computing class usage relations...
 Flushing cached template relations that have become invalid...
 Computing class relations...
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:41: warning: Compound DHBW::XMLparser is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:42: warning: Compound DHBW::XMLparser is not documented.
 C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/abstractXMLparser.h:12: warning: Compound DHBW::abstractXMLparser is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:27: warning: Compound DHBW::filedata is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:13: warning: Compound DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:28: warning: Compound DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:15: warning: Compound DHBW::opt is not documented.
 Add enum values to enums...
 Searching for member function documentation...
 Creating members for template instances...
@@ -104,35 +104,34 @@ C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/abstractXMLparser.h:14: warning
 C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/abstractXMLparser.h:15: warning: Member version (variable) of class DHBW::abstractXMLparser is not documented.
 C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/abstractXMLparser.h:16: warning: Member helptext (variable) of class DHBW::abstractXMLparser is not documented.
 Generating docs for compound DHBW::filedata...
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:28: warning: Member SignPerLine (variable) of struct DHBW::filedata is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:29: warning: Member hfilename (variable) of struct DHBW::filedata is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:30: warning: Member cfilename (variable) of struct DHBW::filedata is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:31: warning: Member nameSpaceName (variable) of struct DHBW::filedata is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:32: warning: Member classname (variable) of struct DHBW::filedata is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:33: warning: Member author (variable) of struct DHBW::filedata is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:34: warning: Member telephonenumber (variable) of struct DHBW::filedata is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:35: warning: Member email (variable) of struct DHBW::filedata is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:36: warning: Member overallDescription (variable) of struct DHBW::filedata is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:37: warning: Member sampleUsage (variable) of struct DHBW::filedata is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:38: warning: Member optarr (variable) of struct DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:29: warning: Member SignPerLine (variable) of struct DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:30: warning: Member hfilename (variable) of struct DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:31: warning: Member cfilename (variable) of struct DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:32: warning: Member nameSpaceName (variable) of struct DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:33: warning: Member classname (variable) of struct DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:34: warning: Member author (variable) of struct DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:35: warning: Member telephonenumber (variable) of struct DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:36: warning: Member email (variable) of struct DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:37: warning: Member overallDescription (variable) of struct DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:38: warning: Member sampleUsage (variable) of struct DHBW::filedata is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:39: warning: Member optarr (variable) of struct DHBW::filedata is not documented.
 Generating docs for compound DHBW::opt...
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:14: warning: Member Ref (variable) of struct DHBW::opt is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:15: warning: Member shortOpt (variable) of struct DHBW::opt is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:16: warning: Member longOpt (variable) of struct DHBW::opt is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:17: warning: Member interface (variable) of struct DHBW::opt is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:18: warning: Member exclusions (variable) of struct DHBW::opt is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:19: warning: Member convertTo (variable) of struct DHBW::opt is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:20: warning: Member deafaultValue (variable) of struct DHBW::opt is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:21: warning: Member connectedtoInternalMethodName (variable) of struct DHBW::opt is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:22: warning: Member connectedtoExternalMethodName (variable) of struct DHBW::opt is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:23: warning: Member hasargs (variable) of struct DHBW::opt is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:24: warning: Member description (variable) of struct DHBW::opt is not documented.
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:25: warning: Member exclusion_arr[] (variable) of struct DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:16: warning: Member Ref (variable) of struct DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:17: warning: Member shortOpt (variable) of struct DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:18: warning: Member longOpt (variable) of struct DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:19: warning: Member interface (variable) of struct DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:20: warning: Member exclusions (variable) of struct DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:21: warning: Member convertTo (variable) of struct DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:22: warning: Member deafaultValue (variable) of struct DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:23: warning: Member connectedtoInternalMethodName (variable) of struct DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:24: warning: Member connectedtoExternalMethodName (variable) of struct DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:25: warning: Member hasargs (variable) of struct DHBW::opt is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:26: warning: Member description (variable) of struct DHBW::opt is not documented.
 Generating docs for compound DHBW::XMLparser...
 Der Befehl "epstopdf" ist entweder falsch geschrieben oder
 konnte nicht gefunden werden.
 error: Problems running epstopdf. Check your TeX installation!
-C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:44: warning: Member xmldata (variable) of class DHBW::XMLparser is not documented.
+C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/XMLparser.h:45: warning: Member xmldata (variable) of class DHBW::XMLparser is not documented.
 C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/abstractXMLparser.h:14: warning: Member xmlpath (variable) of class DHBW::abstractXMLparser is not documented.
 C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/abstractXMLparser.h:15: warning: Member version (variable) of class DHBW::abstractXMLparser is not documented.
 C:/Users/Jonas/CLionProjects/xml_cpp_parser3/scr/abstractXMLparser.h:16: warning: Member helptext (variable) of class DHBW::abstractXMLparser is not documented.
@@ -160,6 +159,6 @@ Generating example index...
 finalizing index lists...
 writing tag file...
 Running plantuml with JAVA...
-lookup cache used 58/65536 hits=99 misses=63
+lookup cache used 57/65536 hits=97 misses=62
 finished...
 *** Doxygen has finished
