@@ -25,10 +25,10 @@ void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
                     // Stichwort für lange Option, Argument (no_argument, optional_argument, required_argument), flag(?), Reference auf Buchstaben
                     {"version",  no_argument, nullptr, 'v'},
                     {"date",     no_argument, nullptr, 'd'},
-                    {"generate", no_argument, nullptr, 'g'}
+                    {"generate", required_argument, nullptr, 'g'}
             };
 
-    while ((i = getopt_long(argc, argv, "hvdg", longopts, &optindex)) >= 0) {
+    while ((i = getopt_long(argc, argv, "hvdg:", longopts, &optindex)) >= 0) {
         //nur options ändern sich : nach Buchstaben falls Parameter
         switch (i) {
             case 'h': //help
