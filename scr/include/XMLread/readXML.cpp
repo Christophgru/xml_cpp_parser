@@ -107,54 +107,54 @@ private:
 void readXML(const string& path, DHBW::filedata& tofill){
     //read XML stuff from path here
     //and put into tofill like that
-        const char *charpath = path.c_str();
-        try {
-            XMLPlatformUtils::Initialize();
-        }
-        catch (const XMLException& toCatch) {
-            char* message = XMLString::transcode(toCatch.getMessage());
-            cerr << "Error during initialization! :\n"
-                 << message << "\n";
-            XMLString::release(&message);
-        }
-
-        SAXParser* parser = {nullptr};
-        parser = new SAXParser;
-
-        int errorCount = {0};
-        try
-        {
-            //Das eigentliche Parsen der Datei
-            SimpleSAXParser handler;
-            parser->setDocumentHandler(&handler);
-            parser->parse(charpath);
-            errorCount = parser->getErrorCount();
-            tofill = handler.data;
-        }
-        catch (const OutOfMemoryException&)
-        {
-            XERCES_STD_QUALIFIER cerr << "OutOfMemoryException" << XERCES_STD_QUALIFIER endl;
-        }
-        catch (const XMLException& toCatch)
-        {
-            char* message = XMLString::transcode(toCatch.getMessage());
-
-            //XMLString::release(message);
-            /*
-            XERCES_STD_QUALIFIER cerr << "\nAn error occurred\n  Error: "
-                                      << StrX(toCatch.getMessage())
-                                      << "\n" << XERCES_STD_QUALIFIER endl;
-                                      */
-            cerr << "XMLException: " << message << endl;
-        }
-        catch(...) {
-            cerr << "Unbekannter Fehler" << endl;
-        }
-
-        cout << "Anzahl Fehler: " << errorCount << endl;
-
-        //Parser sauber beenden
-        delete parser;
-        //Terminate muss immer am Schluss stehen
-        XMLPlatformUtils::Terminate();
+    const char *charpath = path.c_str();
+    try {
+        XMLPlatformUtils::Initialize();
     }
+    catch (const XMLException& toCatch) {
+        char* message = XMLString::transcode(toCatch.getMessage());
+        cerr << "Error during initialization! :\n"
+             << message << "\n";
+        XMLString::release(&message);
+    }
+
+    SAXParser* parser = {nullptr};
+    parser = new SAXParser;
+
+    int errorCount = {0};
+    try
+    {
+        //Das eigentliche Parsen der Datei
+        SimpleSAXParser handler;
+        parser->setDocumentHandler(&handler);
+        parser->parse(charpath);
+        errorCount = parser->getErrorCount();
+        tofill = handler.data;
+    }
+    catch (const OutOfMemoryException&)
+    {
+        XERCES_STD_QUALIFIER cerr << "OutOfMemoryException" << XERCES_STD_QUALIFIER endl;
+    }
+    catch (const XMLException& toCatch)
+    {
+        char* message = XMLString::transcode(toCatch.getMessage());
+
+        //XMLString::release(message);
+        /*
+        XERCES_STD_QUALIFIER cerr << "\nAn error occurred\n  Error: "
+                                  << StrX(toCatch.getMessage())
+                                  << "\n" << XERCES_STD_QUALIFIER endl;
+                                  */
+        cerr << "XMLException: " << message << endl;
+    }
+    catch(...) {
+        cerr << "Unbekannter Fehler" << endl;
+    }
+
+    cout << "Anzahl Fehler: " << errorCount << endl;
+
+    //Parser sauber beenden
+    delete parser;
+    //Terminate muss immer am Schluss stehen
+    XMLPlatformUtils::Terminate();
+}
