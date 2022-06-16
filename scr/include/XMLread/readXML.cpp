@@ -18,7 +18,10 @@ using namespace DHBW;
 
 class SimpleSAXParser : public HandlerBase {
 public:
-    filedata data;
+    filedata getClassdata()
+    {
+        return classdata;
+    }
     void startDocument() override {
         cout << "Dokument beginnt!" << endl;
     }
@@ -42,7 +45,7 @@ public:
         cout << "Element ist zu Ende: " << end << endl;
         if(end == "Option")
         {
-            data.optarr.push_back(options);
+            classdata.optarr.push_back(options);
             options.exclusions.clear();
             options.hasargs = no_argument;
         }
@@ -54,7 +57,7 @@ public:
     }
 private:
     string start;
-
+    filedata classdata;
     opt options;
     wstring_convert<codecvt_utf8_utf16<char16_t>,char16_t> converter{};
     void getExclusions(const string& value)
@@ -68,11 +71,11 @@ private:
     {
         if(startelement == "Author")
         {
-            if(key == "Name")data.author = value;
-            else if(key == "Phone")data.telephonenumber = value;
-            else if(key =="Mail")data.email = value;
+            if(key == "Name")classdata.author = value;
+            else if(key == "Phone")classdata.telephonenumber = value;
+            else if(key =="Mail")classdata.email = value;
         }
-        else if(startelement =="GetOptSetup") data.SignPerLine = value;
+        else if(startelement =="GetOptSetup")classdata.SignPerLine = value;
         else if(startelement == "Option")
         {
             if(key == "Ref")options.Ref = stoi(value);
@@ -93,20 +96,19 @@ private:
     void setStruct(const string& startelement, const string& value)
     {
         if(value != "\n\n    " && value != "\n\n\n    ") {
-            if(startelement == "HeaderFileName")data.hfilename = value;
-            else if(startelement == "SourceFileName")data.cfilename = value;
-            else if(startelement == "NameSpace")data.nameSpaceName = value;
-            else if(startelement == "ClassName")data.classname = value;
-            else if(startelement == "Block")data.overallDescription.push_back(value);
-            else if(startelement == "Sample")data.sampleUsage.push_back(value);
+            if(startelement == "HeaderFileName")classdata.hfilename = value;
+            else if(startelement == "SourceFileName")classdata.cfilename = value;
+            else if(startelement == "NameSpace")classdata.nameSpaceName = value;
+            else if(startelement == "ClassName")classdata.classname = value;
+            else if(startelement == "Block")classdata.overallDescription.push_back(value);
+            else if(startelement == "Sample")classdata.sampleUsage.push_back(value);
 
         }
         //cout << value << endl;
     }
 };
-void readXML(const string& path, DHBW::filedata& tofill){
-    //read XML stuff from path here
-    //and put into tofill like that
+void readXML(const string& path, filedata& data)
+{
     const char *charpath = path.c_str();
     try {
         XMLPlatformUtils::Initialize();
@@ -120,16 +122,13 @@ void readXML(const string& path, DHBW::filedata& tofill){
 
     SAXParser* parser = {nullptr};
     parser = new SAXParser;
-
-    int errorCount = {0};
     try
     {
         //Das eigentliche Parsen der Datei
         SimpleSAXParser handler;
         parser->setDocumentHandler(&handler);
         parser->parse(charpath);
-        errorCount = parser->getErrorCount();
-        tofill = handler.data;
+        data = handler.getClassdata();
     }
     catch (const OutOfMemoryException&)
     {
@@ -151,7 +150,7 @@ void readXML(const string& path, DHBW::filedata& tofill){
         cerr << "Unbekannter Fehler" << endl;
     }
 
-    cout << "Anzahl Fehler: " << errorCount << endl;
+    //cout << "Anzahl Fehler: " << errorCount << endl;
 
     //Parser sauber beenden
     delete parser;
