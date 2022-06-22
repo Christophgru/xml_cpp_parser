@@ -13,7 +13,7 @@ namespace DHBW {
     public:
         std::string xmlpath;
         const std::string version = "1.1.2.4a/c";
-        const std::string helptext;
+        const std::string helptext="Dies ist ein Helptext";
 
         void getOpts(int argc, char **argv);
 

@@ -104,7 +104,7 @@ private:
         //cout << value << endl;
     }
 };
-void readXML(std::string path, DHBW::filedata data){
+void readXML(std::string path, DHBW::filedata& data){
     //read XML stuff from path here
     //and put into tofill like that
 
