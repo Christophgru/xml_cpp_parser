@@ -6,34 +6,20 @@
 #include "XMLparser.h"
 #include "include/filewrite/filewrite.h"
 #include "include/XMLread/readXML.h"
+
 using namespace std;
 
 
+DHBW::XMLparser::~XMLparser() = default;
 
-void DHBW::XMLparser::loadXML(string path) {
-    //Elias
-    readXML(path,xmldata);
-}
+DHBW::XMLparser::XMLparser() = default;
 
-
-
-DHBW::XMLparser::~XMLparser()=default;
-DHBW::XMLparser::XMLparser() =default;
-
-void DHBW::XMLparser::makeHFile() {
+void DHBW::XMLparser::generate(string path) {
+    readXML(path, xmldata);
     buildH(xmldata);
-
-}
-void DHBW::XMLparser::generate() {
-    loadXML("example.xml");
-    makeHFile();
-    makeCFile();
-}
-
-void DHBW::XMLparser::makeCFile() {
     buildC(xmldata);
-
 }
+
 
 
 

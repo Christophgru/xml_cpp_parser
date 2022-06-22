@@ -3,17 +3,18 @@
 //
 #include <ctime>
 #include "../../XMLparser.h"
+#include<fstream>
 
 using namespace std;
 
-int write_data(const string &text, string name) {
-    string filename(name);
+int write_data(const string &text, const string &name) {
 
-    FILE *o_file = fopen(filename.c_str(), "w+");
-    if (o_file) {
-        fwrite(text.c_str(), 1, text.size(), o_file);
-    }
-    return 0;
+    ofstream file;
+    file.open(name, ios::out);
+    file << text;
+    file.close();
+
+
 }
 
 string get_date() {
@@ -33,14 +34,36 @@ string getnameofenum(DHBW::hasArgs args) {
 };
 
 
-std::string generateHelpstr() {
-    return "";
+std::string generateHelpstr(const DHBW::filedata &xmldata) {
+    string hilfetext;
+    hilfetext += "Overall Description:\n";
+    for (int i = 0; i < xmldata.overallDescription.size(); ++i) {
+        hilfetext += data(xmldata.overallDescription)[1];
+        hilfetext += "\n";
+    }
+    hilfetext += "\nSample Usage:\n";
+
+    for (int i = 0; i < xmldata.sampleUsage.size(); ++i) {
+        hilfetext += data(xmldata.sampleUsage)[i];
+        hilfetext += "\n";
+    }
+    hilfetext += "\nOptions:\n";
+
+    for (int i = 0; i < xmldata.optarr.size(); ++i) {
+        DHBW::opt optx = data(xmldata.optarr)[i];
+        hilfetext += "ShortOpt: ";
+        hilfetext += to_string(optx.shortOpt).empty() ? "Keine ShortOpt " : to_string(optx.shortOpt);
+        hilfetext += "LongOpt: ";
+        hilfetext += optx.longOpt.empty() ? "Keine LongOpt " : optx.longOpt;
+        hilfetext += "Description: " + optx.description;
+    }
+    hilfetext += "\nKontaktdaten:\nAutoren: " + xmldata.author + " Email: " + xmldata.email;
 }
 
 
 void buildC(const DHBW::filedata &xmldata) {
     string c_code;
-    string path_c = "/../output/code/" + xmldata.cfilename;
+    string path_c = "./output/src/" + xmldata.cfilename;
 
     //SOF Comment
     string startcomment = "//\n//This empty method body for the class" + xmldata.cfilename
@@ -48,8 +71,12 @@ void buildC(const DHBW::filedata &xmldata) {
     c_code += startcomment;
 
     //includes from hfile
-    c_code += "#include \" ../header/" + xmldata.cfilename + "\" \n";
-    c_code += "#include <getopt.h>\n\n";
+    c_code += "#include \"../headers/" + xmldata.hfilename + "\" \n";
+    c_code += "#include <getopt.h>\n"
+              "\n"
+              "#include <iostream>\n"
+              "\n"
+              "using namespace std;\n\n\n";
     c_code += "void " + xmldata.nameSpaceName + "::" + xmldata.classname + "::getOpts(int argc, char **argv) {\n";
     c_code += "int i;\n"
               "    int optindex;\n";
@@ -65,7 +92,9 @@ void buildC(const DHBW::filedata &xmldata) {
         }
         //und erstelle eine flag für diese shortopt
         if (optx.shortOpt != '-') {
-            c_code += "bool " + to_string(optx.shortOpt) + "_flag;";
+            c_code += "bool ";
+            c_code += optx.shortOpt;
+            c_code += "_flag;";
         }
     }
     c_code += "\n"
@@ -76,7 +105,9 @@ void buildC(const DHBW::filedata &xmldata) {
         if (optx.longOpt != "-") {
             c_code += "{\"" + optx.longOpt +
                       "\", " + getnameofenum(optx.hasargs) +
-                      "+ nullptr, \'" + to_string(optx.shortOpt) + "\'},";
+                      ", nullptr, \'";
+            c_code += optx.shortOpt;
+            c_code += "\'},";
         }
     }
     c_code.pop_back();//delete last comma
@@ -96,38 +127,51 @@ void buildC(const DHBW::filedata &xmldata) {
               "switch(i){\n";
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
         DHBW::opt optx = xmldata.optarr[i];
-        c_code += "\ncase \'" + to_string(optx.shortOpt) + "\':\n";
-        c_code += to_string(optx.shortOpt) + "_flag =true;";
+        c_code += "\ncase \'";
+        c_code += optx.shortOpt;
+        c_code += "\':\n";
+        //falls es einen übergabeparameter gab, hier casten und übergeben
+        if (!optx.convertTo.empty()) {
+            c_code += optx.convertTo + " " + optx.interface + "=argv[argc-1];\n";
+        }
+        c_code += optx.shortOpt;
+        c_code += "_flag =true;";
     }
-    c_code += "default:\nbreak;\n}\n};\n\n\n";
+    c_code += "default:\nbreak;\n}\n\n";
 
 
 
 //exceptioncheck&methoden aufruf
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
         DHBW::opt optx = xmldata.optarr[i];
-        c_code += "if(" + to_string(optx.shortOpt) + "){\n";
+        c_code += "if(";
+        c_code += optx.shortOpt;
+        c_code += "_flag){\n";
         if (optx.exclusions.size() > 0) {
             c_code += "if(";
             for (int j = 0; j < optx.exclusions.size(); ++j) {
                 for (int k = 0; k < xmldata.optarr.size(); ++k) {
-                    DHBW::opt opty = xmldata.optarr[i];
+                    DHBW::opt opty = xmldata.optarr[k];
                     if (optx.exclusions[j] == opty.Ref) {
-                        c_code += to_string(opty.shortOpt) + "_flag ||";
+                        c_code += opty.shortOpt;
+                        c_code += "_flag ||";
                     }
                 }
-                c_code.substr(0, c_code.size() - 2);//delete last two ||
-                c_code += "){\n cout << \"Eclusion Error: " + to_string(optx.shortOpt) + "\" << endl;\nexit(1);\n";
-                c_code += "}else{" + (optx.connectedtoInternalMethodName == "-" ? optx.connectedtoExternalMethodName
-                                                                                : optx.connectedtoInternalMethodName) +
-                          "(); }\n";
             }
+            c_code.substr(0, c_code.size() - 2);//delete last two ||
+            c_code += "){\n cout << \"Exclusion Error: ";
+            c_code += optx.shortOpt;
+            c_code += "\" << endl;\nexit(1);\n";
+            c_code += "}else{"
+                      //Methode aufrufen
+                      + (optx.connectedtoInternalMethodName == "-" ? optx.connectedtoExternalMethodName
+                                                                   : optx.connectedtoInternalMethodName) +
+                      "(" + optx.interface + "); }\n}";
+
         }
-        if (optx.connectedtoInternalMethodName != "-") {
-            c_code += optx.connectedtoInternalMethodName;
-        } else { c_code += optx.connectedtoExternalMethodName; }
-        c_code += "();\n";
     }
+
+    c_code += "}";
 
 
 //Methoden
@@ -140,7 +184,6 @@ void buildC(const DHBW::filedata &xmldata) {
             //internal printhelp methodbody
             if (optx.connectedtoInternalMethodName == "printHelp") {
                 c_code += "void DHBW::abstractXMLparser::print" + optx.interface + "() {\n";
-                c_code += "helptext=\"" + generateHelpstr() + "\";";
                 c_code += "printf(helptext.data());\n}";
             }
 
@@ -180,33 +223,41 @@ void buildC(const DHBW::filedata &xmldata) {
 void buildH(const DHBW::filedata &xmldata) {
 
     string h_code;
-    string path_h = "/../output/header/" + xmldata.hfilename + "\n";
+    string path_h = "./output/headers/" + xmldata.hfilename;
 
     //SOF Comment
-    string startcomment = "//This empty method body for the class" + xmldata.hfilename
-                          + " was created by " + xmldata.author + " on " + get_date() + "\n\n\n\n";
+    string startcomment = "//\n//This empty method body for the class" + xmldata.hfilename
+                          + " was created by " + xmldata.author + " on " + get_date() + "\n//\n\n";
     h_code += startcomment;
 
     //include Guards
-    h_code += "#ifndef " + xmldata.hfilename + "_H" + "\n";
-    h_code += "#define" + xmldata.hfilename + "_H" + "\n\n\n\n";
+    h_code += "#ifndef " + xmldata.hfilename.substr(0, xmldata.hfilename.length() - 2) + "_H" + "\n";
+    h_code += "#define " + xmldata.hfilename.substr(0, xmldata.hfilename.length() - 2) + "_H" + "\n\n";
+
+    //using namespace std
+    h_code += "#include <string>\n\n";
 
     //start namespace
     h_code += "namespace " + xmldata.nameSpaceName + " {" + "\n\n";
 
     //Klassenbeschreibung
-    for (int i = 0; i < xmldata.optarr.size(); ++i) {
+    for (int i = 0; i < xmldata.overallDescription.size(); ++i) {
         h_code += "//" + xmldata.overallDescription[i] + "\n";
     }
 
     //start class
-    h_code += "\nclass" + xmldata.classname + "{" + "\n\n public:";
+    h_code += "\nclass " + xmldata.classname + "{" + "\n\n public:";
 
     //build interfaces
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
         DHBW::opt optx = xmldata.optarr[i];
-        if (!optx.interface.empty()){
-            h_code+=(optx.convertTo.empty()?"void":optx.convertTo)+" "+optx.interface+";\n";
+        if (!optx.interface.empty()) {
+            if (optx.interface == "helptext") {
+                h_code += "const std::string helptext=\"" + generateHelpstr(xmldata) + "\";";
+            } else {
+                if (optx.convertTo == "string") { optx.convertTo = "std::string"; }
+                h_code += (optx.convertTo.empty() ? "void" : optx.convertTo) + " " + optx.interface + ";\n";
+            }
         }
     }
 
@@ -224,20 +275,23 @@ void buildH(const DHBW::filedata &xmldata) {
         }
         //generate external methods
         if (optx.connectedtoExternalMethodName != "-") { //generate externam method
-            h_code += "void " + xmldata.nameSpaceName + "::" + xmldata.classname + "::"
+            h_code += "virtual void "
+                      //+ xmldata.nameSpaceName + "::" + xmldata.classname + "::"
                       + optx.connectedtoExternalMethodName + "()=0;\n\n";
         }
+
+
     }
 
     //klammer zu Klasse
-    h_code += "};";
+    h_code += "}\n;";
 
     //klammer zu namespace
-    h_code += "}";
+    h_code += "}\n";
 
     //klammer zu kompiler includeguard
-    h_code += "#endif";
-    write_data(h_code, path_h);
+    h_code += "\n#endif";
+    write_data(h_code.data(), path_h.data());
 
 }
 

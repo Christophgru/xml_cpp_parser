@@ -107,17 +107,20 @@ private:
 
     void setStruct(string start, string value)
     {
-        if(value != "\n\n    " && value != "\n\n\n    " && value != "\n\n") {
-            if(start == "HeaderFileName")classdata.hfilename = value;
-            else if(start == "SourceFileName")classdata.cfilename = value;
-            else if(start == "NameSpace")classdata.nameSpaceName = value;
-            else if(start == "ClassName")classdata.classname = value;
-            else if(start== "Block")classdata.overallDescription.push_back(value);
-            else if(start == "Sample")classdata.sampleUsage.push_back(value);
+
+        if(value != "\n\t" && value != "\n\t\t"&&value.substr(0,1)!="\n") {
+            if(startelement == "HeaderFileName")data.hfilename = value;
+            else if(startelement == "SourceFileName")data.cfilename = value;
+            else if(startelement == "NameSpace")data.nameSpaceName = value;
+            else if(startelement == "ClassName")data.classname = value;
+            else if(startelement == "Block")data.overallDescription.push_back(value);
+            else if(startelement == "Sample")data.sampleUsage.push_back(value);
+
 
         }
     }
 };
+
 
 void readXML(const string& path, filedata& data)
 {
@@ -134,6 +137,7 @@ void readXML(const string& path, filedata& data)
 
     SAXParser* parser = {nullptr};
     parser = new SAXParser;
+
 
     int errorCount = {0};
     try
@@ -164,6 +168,7 @@ void readXML(const string& path, filedata& data)
     catch(...) {
         cerr << "Unbekannter Fehler" << endl;
     }
+
 
     //cout << "Anzahl Fehler: " << errorCount << endl;
 
