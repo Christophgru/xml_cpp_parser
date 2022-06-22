@@ -72,7 +72,11 @@ void buildC(const DHBW::filedata &xmldata) {
 
     //includes from hfile
     c_code += "#include \"../headers/" + xmldata.hfilename + "\" \n";
-    c_code += "#include <getopt.h>\n\n";
+    c_code += "#include <getopt.h>\n"
+              "\n"
+              "#include <iostream>\n"
+              "\n"
+              "using namespace std;\n\n\n";
     c_code += "void " + xmldata.nameSpaceName + "::" + xmldata.classname + "::getOpts(int argc, char **argv) {\n";
     c_code += "int i;\n"
               "    int optindex;\n";
@@ -94,14 +98,14 @@ void buildC(const DHBW::filedata &xmldata) {
         }
     }
     c_code += "\n"
-              "    const struct option longopts[] ={\n"
+              "    const struct option longopts[] =\n"
               "            {";
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
         DHBW::opt optx = xmldata.optarr[i];
         if (optx.longOpt != "-") {
             c_code += "{\"" + optx.longOpt +
                       "\", " + getnameofenum(optx.hasargs) +
-                      "+ nullptr, \'";
+                      ", nullptr, \'";
             c_code += optx.shortOpt;
             c_code += "\'},";
         }
@@ -127,11 +131,13 @@ void buildC(const DHBW::filedata &xmldata) {
         c_code += optx.shortOpt;
         c_code += "\':\n";
         //falls es einen übergabeparameter gab, hier casten und übergeben
-        c_code += optx.convertTo + " " + optx.interface + "=argv[argc-1];\n";
+        if (!optx.convertTo.empty()) {
+            c_code += optx.convertTo + " " + optx.interface + "=argv[argc-1];\n";
+        }
         c_code += optx.shortOpt;
         c_code += "_flag =true;";
     }
-    c_code += "default:\nbreak;\n}\n};\n\n\n";
+    c_code += "default:\nbreak;\n}\n\n";
 
 
 
@@ -140,31 +146,32 @@ void buildC(const DHBW::filedata &xmldata) {
         DHBW::opt optx = xmldata.optarr[i];
         c_code += "if(";
         c_code += optx.shortOpt;
-        c_code += "){\n";
+        c_code += "_flag){\n";
         if (optx.exclusions.size() > 0) {
             c_code += "if(";
             for (int j = 0; j < optx.exclusions.size(); ++j) {
                 for (int k = 0; k < xmldata.optarr.size(); ++k) {
-                    DHBW::opt opty = xmldata.optarr[i];
+                    DHBW::opt opty = xmldata.optarr[k];
                     if (optx.exclusions[j] == opty.Ref) {
-                        c_code += to_string(opty.shortOpt) + "_flag ||";
+                        c_code += opty.shortOpt;
+                        c_code += "_flag ||";
                     }
                 }
-                c_code.substr(0, c_code.size() - 2);//delete last two ||
-                c_code += "){\n cout << \"Eclusion Error: " + to_string(optx.shortOpt) + "\" << endl;\nexit(1);\n";
-                c_code += "}else{"
-                          //Methode aufrufen
-                          + (optx.connectedtoInternalMethodName == "-" ? optx.connectedtoExternalMethodName
-                                                                       : optx.connectedtoInternalMethodName) +
-                          "(" + optx.interface + "); }\n";
             }
+            c_code.substr(0, c_code.size() - 2);//delete last two ||
+            c_code += "){\n cout << \"Exclusion Error: ";
+            c_code += optx.shortOpt;
+            c_code += "\" << endl;\nexit(1);\n";
+            c_code += "}else{"
+                      //Methode aufrufen
+                      + (optx.connectedtoInternalMethodName == "-" ? optx.connectedtoExternalMethodName
+                                                                   : optx.connectedtoInternalMethodName) +
+                      "(" + optx.interface + "); }\n}";
+
         }
-        if (optx.connectedtoInternalMethodName != "-") {
-            c_code += optx.connectedtoInternalMethodName;
-        } else { c_code += optx.connectedtoExternalMethodName; }
-        c_code += "();\n";
     }
-    c_code += "default:\nbreak;\n}\n};\n\n\n";
+
+    c_code += "}";
 
 
 //Methoden
@@ -234,7 +241,7 @@ void buildH(const DHBW::filedata &xmldata) {
     h_code += "namespace " + xmldata.nameSpaceName + " {" + "\n\n";
 
     //Klassenbeschreibung
-    for (int i = 0; i < xmldata.optarr.size(); ++i) {
+    for (int i = 0; i < xmldata.overallDescription.size(); ++i) {
         h_code += "//" + xmldata.overallDescription[i] + "\n";
     }
 
