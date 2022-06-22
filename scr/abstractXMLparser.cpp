@@ -42,8 +42,7 @@ void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
                 break;
             case 'g': {
                 g_flag = true;
-                char *temp = gets(optarg);
-                xmlpath = temp;
+                xmlpath = argv[argc-1];
                 break;
             }
             default:
