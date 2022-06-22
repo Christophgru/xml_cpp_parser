@@ -92,7 +92,7 @@ private:
 
     void setStruct(string startelement, string value)
     {
-        if(value != "\n\t" && value != "\n\t\t") {
+        if(value != "\n\t" && value != "\n\t\t"&&value.substr(0,1)!="\n") {
             if(startelement == "HeaderFileName")data.hfilename = value;
             else if(startelement == "SourceFileName")data.cfilename = value;
             else if(startelement == "NameSpace")data.nameSpaceName = value;
@@ -127,7 +127,7 @@ void readXML(std::string path, DHBW::filedata& data){
             //Das eigentliche Parsen der Datei
             SimpleSAXParser handler;
             parser->setDocumentHandler(&handler);
-            parser->parse("C:\\Users\\chris\\OneDrive\\Dokumente\\DHBW\\Programmieren\\c_cpp\\xml_cpp_parser(1)\\xml_src\\example.xml");
+            parser->parse("C:\\Users\\chris\\OneDrive\\Dokumente\\DHBW\\Programmieren\\c_cpp\\xml_cpp_parser(1)\\xml_src\\example_christoph.xml");
             errorCount = parser->getErrorCount();
             data = handler.data;
         }

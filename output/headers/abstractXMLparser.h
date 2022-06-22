@@ -1,5 +1,5 @@
 //
-//This empty method body for the classabstractXMLparser.h was created by Chrissi on 06/22/2022
+//This empty method body for the classabstractXMLparser.h was created by Jonas Heiss on 06/22/2022
 //
 
 #ifndef abstractXMLparser_H
@@ -9,13 +9,22 @@
 
 namespace DHBW {
 
-//Hier steht eine grundsätzliche Beschreibung
+//Erstellt einen Rumpf zum einlesen von Argumente aus der Kommandozeile.
+//Es kann sowohl mit innenliegenden Container wie externer Klassenanbindung eine Datenhaltung erfolgen.
+        
+//Sobald ein Methodenaufruf abstrakt ist, wird die Basisklasse abstrakt.
+//Fuer die Formatierung der generierten Dateien wird astyle verwendet.
 
 class abstractXMLparser{
 
- public:std::string path;
-//Dies ist die Beshreibung der option G
-virtual void generate()=0;
+ public://Diese Hilfe ausgeben und beenden
+void printhelp();
+
+//Gibt die Version des Programms aus und beendet
+void printversion();
+
+//Gibt XML an die eingelesen werden soll
+void printversion();
 
 }
 ;}
