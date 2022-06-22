@@ -18,16 +18,12 @@ using namespace DHBW;
 
 class SimpleSAXParser : public HandlerBase {
 public:
-    filedata getClassdata()
-    {
-        return classdata;
-    }
     void startDocument() override {
-        cout << "Dokument beginnt!" << endl;
+        //cout << "Dokument beginnt!" << endl;
     }
 
     void endDocument() override {
-        cout << "Dokument ist zu Ende!" << endl;
+        //cout << "Dokument ist zu Ende!" << endl;
     }
 
     void startElement(const XMLCh* const name, AttributeList& attributes) override {
@@ -42,11 +38,10 @@ public:
     void endElement(const XMLCh* const name) override {
         string end;
         end = XMLString::transcode(name);
-        cout << "Element ist zu Ende: " << end << endl;
         if(end == "Option")
         {
             classdata.optarr.push_back(options);
-            options.exclusions.clear();
+            clearoptions();
             options.hasargs = no_argument;
         }
     }
@@ -55,28 +50,47 @@ public:
         //cout << "Buchstaben (" << length << "):" << XMLString::transcode(chars) << endl;
         setStruct(start, XMLString::transcode(chars));
     }
+    filedata getClassdata()
+    {
+        return classdata;
+    }
 private:
     string start;
     filedata classdata;
     opt options;
     wstring_convert<codecvt_utf8_utf16<char16_t>,char16_t> converter{};
-    void getExclusions(const string& value)
+
+    void clearoptions()
+    {
+        options.Ref = 0;//standardmäßig 0 wird genutzt für excludes
+        options.shortOpt = '-';
+        options.longOpt = '-';
+        options.interface = '-';
+        options.exclusions.clear();//Ref der Opts die nicht mit dieser aufgerufen werden dürfen
+        options.convertTo = '-'; //Datentyp des folgeparameters
+        options.deafaultValue = '-';
+        options.connectedtoInternalMethodName = "-";
+        options.connectedtoExternalMethodName = "-";
+        options.hasargs = no_argument;
+        options.description = '-';
+    }
+    void getExclusions(string value)
     {
         for(char i : value)
         {
             if(i != ',')options.exclusions.push_back(i);
         }
     }
-    void setStruct(const string& startelement, const string& key, string value)
+    void setStruct(string start, string key, string value)
     {
-        if(startelement == "Author")
+        if(start == "Author")
         {
             if(key == "Name")classdata.author = value;
             else if(key == "Phone")classdata.telephonenumber = value;
             else if(key =="Mail")classdata.email = value;
         }
-        else if(startelement =="GetOptSetup")classdata.SignPerLine = value;
-        else if(startelement == "Option")
+        else if(start=="GetOptSetup") classdata.SignPerLine = value;
+        else if(start == "Option")
         {
             if(key == "Ref")options.Ref = stoi(value);
             else if(key == "ShortOpt")options.shortOpt = value.at(0);
@@ -89,24 +103,22 @@ private:
                 else if(value == "optional")options.hasargs = optional_argument;
             }
         }
-
-        //cout << key << ": " << value << endl;
     }
 
-    void setStruct(const string& startelement, const string& value)
+    void setStruct(string start, string value)
     {
-        if(value != "\n\n    " && value != "\n\n\n    ") {
-            if(startelement == "HeaderFileName")classdata.hfilename = value;
-            else if(startelement == "SourceFileName")classdata.cfilename = value;
-            else if(startelement == "NameSpace")classdata.nameSpaceName = value;
-            else if(startelement == "ClassName")classdata.classname = value;
-            else if(startelement == "Block")classdata.overallDescription.push_back(value);
-            else if(startelement == "Sample")classdata.sampleUsage.push_back(value);
+        if(value != "\n\n    " && value != "\n\n\n    " && value != "\n\n") {
+            if(start == "HeaderFileName")classdata.hfilename = value;
+            else if(start == "SourceFileName")classdata.cfilename = value;
+            else if(start == "NameSpace")classdata.nameSpaceName = value;
+            else if(start == "ClassName")classdata.classname = value;
+            else if(start== "Block")classdata.overallDescription.push_back(value);
+            else if(start == "Sample")classdata.sampleUsage.push_back(value);
 
         }
-        //cout << value << endl;
     }
 };
+
 void readXML(const string& path, filedata& data)
 {
     const char *charpath = path.c_str();
@@ -122,12 +134,15 @@ void readXML(const string& path, filedata& data)
 
     SAXParser* parser = {nullptr};
     parser = new SAXParser;
+
+    int errorCount = {0};
     try
     {
         //Das eigentliche Parsen der Datei
         SimpleSAXParser handler;
         parser->setDocumentHandler(&handler);
         parser->parse(charpath);
+        errorCount = parser->getErrorCount();
         data = handler.getClassdata();
     }
     catch (const OutOfMemoryException&)
