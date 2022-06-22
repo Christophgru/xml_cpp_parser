@@ -40,8 +40,12 @@ void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
             case 'd': //date
                 d_flag = true;
                 break;
-            case 'g':
+            case 'g': {
                 g_flag = true;
+                char *temp = gets(optarg);
+                xmlpath = temp;
+                break;
+            }
             default:
                 break;
         }
@@ -71,8 +75,7 @@ void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
         } else {/*do sth*/}
     }
     if (g_flag) {
-        string path(optarg);
-        generate(path);
+        generate(xmlpath);
     }
 }
 

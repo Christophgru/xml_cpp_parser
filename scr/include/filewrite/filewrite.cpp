@@ -119,6 +119,8 @@ void buildC(const DHBW::filedata &xmldata) {
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
         DHBW::opt optx = xmldata.optarr[i];
         c_code += "\ncase \'" + to_string(optx.shortOpt) + "\':\n";
+        //falls es einen übergabeparameter gab, hier casten und übergeben
+        c_code+=optx.convertTo+" "+optx.interface+"=optarg;\n";
         c_code += to_string(optx.shortOpt) + "_flag =true;";
     }
     c_code += "default:\nbreak;\n}\n};\n\n\n";
@@ -140,9 +142,11 @@ void buildC(const DHBW::filedata &xmldata) {
                 }
                 c_code.substr(0, c_code.size() - 2);//delete last two ||
                 c_code += "){\n cout << \"Eclusion Error: " + to_string(optx.shortOpt) + "\" << endl;\nexit(1);\n";
-                c_code += "}else{" + (optx.connectedtoInternalMethodName == "-" ? optx.connectedtoExternalMethodName
+                c_code += "}else{"
+                        //Methode aufrufen
+                        + (optx.connectedtoInternalMethodName == "-" ? optx.connectedtoExternalMethodName
                                                                                 : optx.connectedtoInternalMethodName) +
-                          "(); }\n";
+                          "("+optx.interface+"); }\n";
             }
         }
         if (optx.connectedtoInternalMethodName != "-") {
@@ -163,7 +167,6 @@ void buildC(const DHBW::filedata &xmldata) {
             //internal printhelp methodbody
             if (optx.connectedtoInternalMethodName == "printHelp") {
                 c_code += "void DHBW::abstractXMLparser::print" + optx.interface + "() {\n";
-                c_code += "helptext=\"" + generateHelpstr(xmldata) + "\";";
                 c_code += "printf(helptext.data());\n}";
             }
 
@@ -229,7 +232,11 @@ void buildH(const DHBW::filedata &xmldata) {
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
         DHBW::opt optx = xmldata.optarr[i];
         if (!optx.interface.empty()){
-            h_code+=(optx.convertTo.empty()?"void":optx.convertTo)+" "+optx.interface+";\n";
+            if(optx.interface!="helptext"){
+            h_code+=(optx.convertTo.empty()?"void":optx.convertTo)+" "+optx.interface+";\n";}
+            else {
+                h_code+="const std::string helptext=\""+generateHelpstr(xmldata)+"\";";
+            }
         }
     }
 
