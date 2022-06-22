@@ -18,6 +18,7 @@ using namespace DHBW;
 
 class SimpleSAXParser : public HandlerBase {
 public:
+    filedata data;
     void startDocument() override {
         //cout << "Dokument beginnt!" << endl;
     }
@@ -105,7 +106,7 @@ private:
         }
     }
 
-    void setStruct(string start, string value)
+    void setStruct(string startelement, string value)
     {
 
         if(value != "\n\t" && value != "\n\t\t"&&value.substr(0,1)!="\n") {

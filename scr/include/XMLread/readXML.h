@@ -8,7 +8,7 @@
 #include "../../XMLparser.h"
 
 
-void readXML(const std::string& path, const DHBW::filedata& tofill);
+void readXML(const std::string& path, DHBW::filedata& tofill);
 
 
 #endif //XMLPARSER_ABGABE_RADXML_H
