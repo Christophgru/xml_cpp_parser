@@ -11,6 +11,7 @@ using namespace std;
 
 void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
     //Falls c-code erstellt werden soll, schreibe pfad des xml_src-files in xmlpfad
+    workingdir=argv[0];
     int i;
     int optindex;
     bool h_flag;
