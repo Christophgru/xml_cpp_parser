@@ -18,7 +18,6 @@ using namespace DHBW;
 
 class SimpleSAXParser : public HandlerBase {
 public:
-    filedata data;
     void startDocument() override {
         //cout << "Dokument beginnt!" << endl;
     }
@@ -98,7 +97,10 @@ private:
             else if(key == "LongOpt")options.longOpt = value;
             else if(key == "Exclusion")getExclusions(value);
             else if(key == "ConnectToInternalMethod")options.connectedtoInternalMethodName = value;
+            else if(key == "ConnectToExternalMethod")options.connectedtoExternalMethodName = value;
             else if(key == "Description")options.description = value;
+            else if(key == "interface")options.interface = value;
+            else if(key == "convertTo")options.convertTo = value;
             else if(key == "HasArguments"){
                 if(value == "Required")options.hasargs = required_argument;
                 else if(value == "optional")options.hasargs = optional_argument;
@@ -110,12 +112,13 @@ private:
     {
 
         if(value != "\n\t" && value != "\n\t\t"&&value.substr(0,1)!="\n") {
-            if(startelement == "HeaderFileName")data.hfilename = value;
-            else if(startelement == "SourceFileName")data.cfilename = value;
-            else if(startelement == "NameSpace")data.nameSpaceName = value;
-            else if(startelement == "ClassName")data.classname = value;
-            else if(startelement == "Block")data.overallDescription.push_back(value);
-            else if(startelement == "Sample")data.sampleUsage.push_back(value);
+            if(startelement == "HeaderFileName")classdata.hfilename = value;
+            else if(startelement == "SourceFileName")classdata.cfilename = value;
+            else if(startelement == "NameSpace")classdata.nameSpaceName = value;
+            else if(startelement == "ClassName")classdata.classname = value;
+            else if(startelement == "Block")classdata.overallDescription.push_back(value);
+            else if(startelement == "Sample")classdata.sampleUsage.push_back(value);
+
 
 
         }
@@ -123,7 +126,8 @@ private:
 };
 
 
-void readXML(const string& path, filedata& data)
+
+void readXML(std::string path, DHBW::filedata& tofill)
 {
     const char *charpath = path.c_str();
     try {
@@ -148,7 +152,9 @@ void readXML(const string& path, filedata& data)
         parser->setDocumentHandler(&handler);
         parser->parse(charpath);
         errorCount = parser->getErrorCount();
-        data = handler.getClassdata();
+
+        tofill = handler.getClassdata();
+
     }
     catch (const OutOfMemoryException&)
     {

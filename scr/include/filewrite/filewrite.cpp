@@ -36,28 +36,29 @@ string getnameofenum(DHBW::hasArgs args) {
 
 std::string generateHelpstr(const DHBW::filedata &xmldata) {
     string hilfetext;
-    hilfetext += "Overall Description:\n";
+    hilfetext += "Overall Description:\"\n";
     for (int i = 0; i < xmldata.overallDescription.size(); ++i) {
-        hilfetext += data(xmldata.overallDescription)[1];
-        hilfetext += "\n";
+        hilfetext += "\"" + data(xmldata.overallDescription)[i];
+        hilfetext += "\"\n";
     }
-    hilfetext += "\nSample Usage:\n";
+    hilfetext += "\n\"Sample Usage:\"\n";
 
     for (int i = 0; i < xmldata.sampleUsage.size(); ++i) {
-        hilfetext += data(xmldata.sampleUsage)[i];
-        hilfetext += "\n";
+        hilfetext += "\"" + data(xmldata.sampleUsage)[i];
+        hilfetext += "\"\n";
     }
-    hilfetext += "\nOptions:\n";
+    hilfetext += "\n\"Options:\"\n";
 
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
         DHBW::opt optx = data(xmldata.optarr)[i];
-        hilfetext += "ShortOpt: ";
-        hilfetext += to_string(optx.shortOpt).empty() ? "Keine ShortOpt " : to_string(optx.shortOpt);
-        hilfetext += "LongOpt: ";
+        hilfetext += "\" ShortOpt: ";
+        to_string(optx.shortOpt).empty() ? hilfetext += "Keine ShortOpt " : hilfetext += optx.shortOpt;
+        hilfetext += " LongOpt: ";
         hilfetext += optx.longOpt.empty() ? "Keine LongOpt " : optx.longOpt;
-        hilfetext += "Description: " + optx.description;
+        hilfetext += " Description: " + optx.description + "\"\n";
     }
-    hilfetext += "\nKontaktdaten:\nAutoren: " + xmldata.author + " Email: " + xmldata.email;
+    hilfetext += " \n\"Kontaktdaten:\"\n\"Autoren: " + xmldata.author + " Email: " + xmldata.email;
+    return hilfetext;
 }
 
 
@@ -78,7 +79,8 @@ void buildC(const DHBW::filedata &xmldata) {
               "\n"
               "using namespace std;\n\n\n";
     c_code += "void " + xmldata.nameSpaceName + "::" + xmldata.classname + "::getOpts(int argc, char **argv) {\n";
-    c_code += "int i;\n"
+    c_code += "workingdir=argv[0];"
+              "int i;\n"
               "    int optindex;\n";
 
 
@@ -131,8 +133,8 @@ void buildC(const DHBW::filedata &xmldata) {
         c_code += optx.shortOpt;
         c_code += "\':\n";
         //falls es einen übergabeparameter gab, hier casten und übergeben
-        if (!optx.convertTo.empty()) {
-            c_code += optx.convertTo + " " + optx.interface + "=argv[argc-1];\n";
+        if (!(optx.convertTo.empty() || optx.convertTo == "-" || optx.interface == "Version")) {
+            c_code += " " + optx.interface + "=argv[argc-1];\n";
         }
         c_code += optx.shortOpt;
         c_code += "_flag =true;";
@@ -148,17 +150,19 @@ void buildC(const DHBW::filedata &xmldata) {
         c_code += optx.shortOpt;
         c_code += "_flag){\n";
         if (optx.exclusions.size() > 0) {
-            c_code += "if(";
+            c_code += "if(  ";
             for (int j = 0; j < optx.exclusions.size(); ++j) {
                 for (int k = 0; k < xmldata.optarr.size(); ++k) {
                     DHBW::opt opty = xmldata.optarr[k];
-                    if (optx.exclusions[j] == opty.Ref) {
+                    int currentexclusion = optx.exclusions[j] - 48;
+                    if (currentexclusion == opty.Ref) {
                         c_code += opty.shortOpt;
                         c_code += "_flag ||";
                     }
                 }
             }
-            c_code.substr(0, c_code.size() - 2);//delete last two ||
+            c_code.pop_back();
+            c_code.pop_back();//delete last two ||
             c_code += "){\n cout << \"Exclusion Error: ";
             c_code += optx.shortOpt;
             c_code += "\" << endl;\nexit(1);\n";
@@ -166,7 +170,9 @@ void buildC(const DHBW::filedata &xmldata) {
                       //Methode aufrufen
                       + (optx.connectedtoInternalMethodName == "-" ? optx.connectedtoExternalMethodName
                                                                    : optx.connectedtoInternalMethodName) +
-                      "(" + optx.interface + "); }\n}";
+                      "(" + (optx.interface.empty() || optx.interface == "-" || optx.hasargs == DHBW::no_argument ? ""
+                                                                                                                  : optx.interface) +
+                      "); }\n}";
 
         }
     }
@@ -195,14 +201,16 @@ void buildC(const DHBW::filedata &xmldata) {
         }
 
         //generate interface getter und bool isSet()
-        if (optx.interface != "-") {
+        if (optx.interface != "-" && !optx.interface.empty()) {
             if (optx.hasargs != DHBW::no_argument) {
                 //getter
                 c_code += optx.convertTo + " " + xmldata.nameSpaceName + "::" + xmldata.classname + "::getValueOf" +
-                          (optx.longOpt == "-" ? to_string(optx.shortOpt) : optx.longOpt) + "(){\n";
+                          optx.interface + "(){\n";
                 if (optx.hasargs != DHBW::optional_argument) {
                     c_code +=
-                            "if(" + optx.interface + "==" + optx.deafaultValue + "or ){return " + optx.interface +
+                            "if(" + optx.interface + "!=\"" + optx.deafaultValue + "\"||" + optx.interface +
+                            "!= \"\"){return " +
+                            optx.interface +
                             ";}";
                 }
                 c_code += " return " + optx.interface + ";\n}\n\n";
@@ -247,19 +255,25 @@ void buildH(const DHBW::filedata &xmldata) {
 
     //start class
     h_code += "\nclass " + xmldata.classname + "{" + "\n\n public:";
-
+    h_code += "\n std::string workingdir;\n";
     //build interfaces
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
         DHBW::opt optx = xmldata.optarr[i];
-        if (!optx.interface.empty()) {
+        if (!(optx.interface.empty() || optx.interface == "-")) {
             if (optx.interface == "helptext") {
-                h_code += "const std::string helptext=\"" + generateHelpstr(xmldata) + "\";";
+                h_code += "const std::string helptext=\"";
+                h_code += generateHelpstr(xmldata);
+                h_code += "\";";
+            } else if (optx.interface == "Version") {
+                h_code += "const std::string version=\"" + (xmldata.version.empty() ? "tba" : xmldata.version) + "\";";
             } else {
                 if (optx.convertTo == "string") { optx.convertTo = "std::string"; }
                 h_code += (optx.convertTo.empty() ? "void" : optx.convertTo) + " " + optx.interface + ";\n";
             }
         }
     }
+
+    h_code += "\n\nvoid getOpts(int argc, char **argv);\n\n";
 
     //build external method declarations
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
@@ -274,14 +288,26 @@ void buildH(const DHBW::filedata &xmldata) {
             h_code += "void " + optx.connectedtoInternalMethodName + "();" + "\n\n";
         }
         //generate external methods
-        if (optx.connectedtoExternalMethodName != "-") { //generate externam method
-            h_code += "virtual void "
-                      //+ xmldata.nameSpaceName + "::" + xmldata.classname + "::"
-                      + optx.connectedtoExternalMethodName + "()=0;\n\n";
+        if (!(optx.interface.empty() || optx.connectedtoExternalMethodName == "-"|| optx.connectedtoExternalMethodName.empty())) { //generate externam method
+            h_code += "virtual void " + optx.connectedtoExternalMethodName + "(" +
+                      (optx.convertTo == "string" ? "std::string" : optx.convertTo) + " " + optx.interface + ")=0;\n\n";
+        }
+//generate interface getter und bool isSet()
+        if (optx.interface != "-" && !optx.interface.empty()) {
+            if (optx.hasargs != DHBW::no_argument) {
+                //getter
+                h_code +=
+                        (optx.convertTo == "string" ? "std::string" : optx.convertTo) + " getValueOf" + optx.interface +
+                        "();\n\n";
+
+            }
+            //is set
+            h_code += "bool isSet" + optx.interface + "();\n\n";
         }
 
-
     }
+
+
 
     //klammer zu Klasse
     h_code += "}\n;";

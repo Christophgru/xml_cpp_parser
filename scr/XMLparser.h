@@ -22,12 +22,13 @@ namespace DHBW {
         vector<uint8_t> exclusions;//Ref der Opts die nicht mit dieser aufgerufen werden dürfen
         string convertTo; //Datentyp des folgeparameters
         string deafaultValue;
-        string connectedtoInternalMethodName = "-";
-        string connectedtoExternalMethodName = "-";
+        string connectedtoInternalMethodName;
+        string connectedtoExternalMethodName;
         hasArgs hasargs = no_argument;
         string description;
     };
     struct filedata {
+        string version;
         string SignPerLine;
         string hfilename;
         string cfilename;
