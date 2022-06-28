@@ -6,7 +6,7 @@
 
 #include <string>
 #include "vector"
-#include "abstractXMLparser.h"
+#include "generated/abstractXMLparser.h"
 
 using namespace std;
 
