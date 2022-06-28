@@ -23,6 +23,7 @@ void DHBW::XMLparser::generate(string path) {
     readXML(path, xmldata);
     buildH(xmldata);
     buildC(xmldata);
+    printf("Generating done");
 }
 
 

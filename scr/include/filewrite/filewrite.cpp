@@ -64,15 +64,16 @@ std::string generateHelpstr(const DHBW::filedata &xmldata) {
 
 void buildC(const DHBW::filedata &xmldata) {
     string c_code;
-    string path_c = "./output/src/" + xmldata.cfilename;
+    string path_c = "./output/" + xmldata.cfilename;
 
     //SOF Comment
     string startcomment = "//\n//This empty method body for the class" + xmldata.cfilename
-                          + " was created by " + xmldata.author + " on " + get_date() + "\n//\n";
+                          + " was created by " + xmldata.author + " on " + get_date() + " contact me under" +
+                          xmldata.telephonenumber + "\n//\n";
     c_code += startcomment;
 
     //includes from hfile
-    c_code += "#include \"../headers/" + xmldata.hfilename + "\" \n";
+    c_code += "#include \"./" + xmldata.hfilename + "\" \n";
     c_code += "#include <getopt.h>\n"
               "\n"
               "#include <iostream>\n"
@@ -96,7 +97,7 @@ void buildC(const DHBW::filedata &xmldata) {
         if (optx.shortOpt != '-') {
             c_code += "bool ";
             c_code += optx.shortOpt;
-            c_code += "_flag;";
+            c_code += "_flag = false;";
         }
     }
     c_code += "\n"
@@ -123,7 +124,11 @@ void buildC(const DHBW::filedata &xmldata) {
     //create string with first letters
     string firstletter;
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        firstletter += xmldata.optarr[i].shortOpt;
+        DHBW::opt optx=xmldata.optarr[i];
+        firstletter += optx.shortOpt;
+        if(optx.hasargs!=DHBW::no_argument){
+            firstletter+=":";
+        }
     }
     c_code += "while ((i = getopt_long(argc, argv, \"" + firstletter + "\", longopts, &optindex)) >=0)\n" +
               "switch(i){\n";
@@ -133,11 +138,11 @@ void buildC(const DHBW::filedata &xmldata) {
         c_code += optx.shortOpt;
         c_code += "\':\n";
         //falls es einen übergabeparameter gab, hier casten und übergeben
-        if (!(optx.convertTo.empty() || optx.convertTo == "-" || optx.interface == "Version")) {
+        if (!(optx.convertTo.empty() || optx.convertTo == "-" || optx.interface == "version")) {
             c_code += " " + optx.interface + "=argv[argc-1];\n";
         }
         c_code += optx.shortOpt;
-        c_code += "_flag =true;";
+        c_code += "_flag =true;\n break;";
     }
     c_code += "default:\nbreak;\n}\n\n";
 
@@ -188,15 +193,18 @@ void buildC(const DHBW::filedata &xmldata) {
         if (optx.connectedtoInternalMethodName != "-") {
 
             //internal printhelp methodbody
-            if (optx.connectedtoInternalMethodName == "printHelp") {
+            if (optx.connectedtoInternalMethodName == "printhelp") {
+                c_code += "void DHBW::abstractXMLparser::print" + optx.longOpt + "() {\n";
+                c_code += "printf(\"%s\"," + optx.interface + ".data());\n}";
+            } else if (optx.connectedtoInternalMethodName == "printversion") {
                 c_code += "void DHBW::abstractXMLparser::print" + optx.interface + "() {\n";
-                c_code += "printf(helptext.data());\n}";
+                c_code += "printf(\"Your current Version is: %s\"," + optx.interface + ".data());\n}";
             }
 
                 //Internal print [...] Method
             else if (optx.connectedtoInternalMethodName.substr(0, size("print")) == "print") {
                 c_code += "void DHBW::abstractXMLparser::print" + optx.interface + "() {\n";
-                c_code += "printf(" + optx.interface + ".data());\n}";
+                c_code += "printf(\"%s\"," + optx.interface + ".data());\n}";
             }
         }
 
@@ -231,7 +239,7 @@ void buildC(const DHBW::filedata &xmldata) {
 void buildH(const DHBW::filedata &xmldata) {
 
     string h_code;
-    string path_h = "./output/headers/" + xmldata.hfilename;
+    string path_h = "./output/" + xmldata.hfilename;
 
     //SOF Comment
     string startcomment = "//\n//This empty method body for the class" + xmldata.hfilename
@@ -264,7 +272,7 @@ void buildH(const DHBW::filedata &xmldata) {
                 h_code += "const std::string helptext=\"";
                 h_code += generateHelpstr(xmldata);
                 h_code += "\";";
-            } else if (optx.interface == "Version") {
+            } else if (optx.interface == "version") {
                 h_code += "const std::string version=\"" + (xmldata.version.empty() ? "tba" : xmldata.version) + "\";";
             } else {
                 if (optx.convertTo == "string") { optx.convertTo = "std::string"; }
@@ -288,7 +296,8 @@ void buildH(const DHBW::filedata &xmldata) {
             h_code += "void " + optx.connectedtoInternalMethodName + "();" + "\n\n";
         }
         //generate external methods
-        if (!(optx.interface.empty() || optx.connectedtoExternalMethodName == "-"|| optx.connectedtoExternalMethodName.empty())) { //generate externam method
+        if (!(optx.interface.empty() || optx.connectedtoExternalMethodName == "-" ||
+              optx.connectedtoExternalMethodName.empty())) { //generate externam method
             h_code += "virtual void " + optx.connectedtoExternalMethodName + "(" +
                       (optx.convertTo == "string" ? "std::string" : optx.convertTo) + " " + optx.interface + ")=0;\n\n";
         }
