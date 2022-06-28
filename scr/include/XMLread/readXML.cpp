@@ -120,9 +120,11 @@ private:
             else if(startelement == "Sample")classdata.sampleUsage.push_back(value);
 
 
+
         }
     }
 };
+
 
 
 void readXML(std::string path, DHBW::filedata& tofill)
@@ -150,7 +152,9 @@ void readXML(std::string path, DHBW::filedata& tofill)
         parser->setDocumentHandler(&handler);
         parser->parse(charpath);
         errorCount = parser->getErrorCount();
+
         tofill = handler.getClassdata();
+
     }
     catch (const OutOfMemoryException&)
     {
