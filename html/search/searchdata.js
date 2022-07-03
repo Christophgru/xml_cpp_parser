@@ -1,7 +1,7 @@
 var indexSectionsWithContent =
 {
-  0: "afox",
-  1: "afox"
+  0: "fox",
+  1: "fox"
 };
 
 var indexSectionNames =
