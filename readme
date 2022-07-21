@@ -1,0 +1,5 @@
+example usage:
+
+-g ./xml_src/example_christoph.xml
+-v
+-h

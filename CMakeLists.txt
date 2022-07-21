@@ -8,7 +8,7 @@ add_executable(xmlparser_abgabe
         scr/main.cpp
         scr/XMLparser.cpp
         scr/include/filewrite/filewrite.cpp
-        scr/generated/abstractXMLparser.cpp
+        scr/generated/Cfiles/abstractXMLparser.cpp
         scr/include/XMLread/readXML.cpp)
 
 include(FindXercesC)

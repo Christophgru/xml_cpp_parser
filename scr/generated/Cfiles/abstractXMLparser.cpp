@@ -1,7 +1,7 @@
 //
-//This empty method body for the classabstractXMLparser.cpp was created by Jonas Heiss on 06/28/2022 contact me under110
+//This empty method body for the classabstractXMLparser.cpp was created by Jonas Heiss on 07/21/2022 contact me under110
 //
-#include "./abstractXMLparser.h"
+#include "../Hfiles/abstractXMLparser.h"
 #include <getopt.h>
 
 #include <iostream>
@@ -9,7 +9,7 @@
 using namespace std;
 
 
-void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
+void DHBW::abstractXMLparser::parseOptions(int argc, char **argv) {
     workingdir = argv[0];
     int i;
     int optindex;
@@ -41,18 +41,21 @@ void DHBW::abstractXMLparser::getOpts(int argc, char **argv) {
     if (h_flag) {
         if (v_flag || g_flag) {
             cout << "Exclusion Error: h" << endl;
+
             exit(1);
         } else { printhelp(); }
     }
     if (v_flag) {
         if (h_flag || g_flag) {
             cout << "Exclusion Error: v" << endl;
+
             exit(1);
         } else { printversion(); }
     }
     if (g_flag) {
         if (h_flag || v_flag) {
             cout << "Exclusion Error: g" << endl;
+
             exit(1);
         } else { generate(path); }
     }

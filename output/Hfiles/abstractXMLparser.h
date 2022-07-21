@@ -1,5 +1,5 @@
 //
-//This empty method body for the classabstractXMLparser.h was created by Jonas Heiss on 06/28/2022
+//This empty method body for the classabstractXMLparser.h was created by Jonas Heiss on 07/21/2022
 //
 
 #ifndef abstractXMLparser_H
@@ -37,7 +37,7 @@ const std::string helptext="Overall Description:"
 "Autoren: Jonas Heiss Email: Jonas.Heiss@AliExpress.com";const std::string version="tba";std::string path;
 
 
-void getOpts(int argc, char **argv);
+void parseOptions(int argc, char **argv);
 
 //Diese Hilfe ausgeben und beenden
 void printhelp();
