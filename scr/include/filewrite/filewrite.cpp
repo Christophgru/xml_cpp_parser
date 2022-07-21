@@ -177,7 +177,7 @@ void buildC(const DHBW::filedata &xmldata) {
             c_code.pop_back();//delete last two ||
             c_code += "){\n cout << \"Exclusion Error: ";
             c_code += optx.shortOpt;
-            c_code += "\" << endl;\n"
+            c_code += "\" << endl;\n cerr << \"Exclusion Error \"<<endl;\n";
                       "\nexit(1);\n";
             c_code += "}else{"
                       //Methode aufrufen

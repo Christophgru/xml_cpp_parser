@@ -41,21 +41,21 @@ void DHBW::abstractXMLparser::parseOptions(int argc, char **argv) {
     if (h_flag) {
         if (v_flag || g_flag) {
             cout << "Exclusion Error: h" << endl;
-
+cerr<<"Exclusion Error"<<endl;
             exit(1);
         } else { printhelp(); }
     }
     if (v_flag) {
         if (h_flag || g_flag) {
             cout << "Exclusion Error: v" << endl;
-
+            cerr<<"Exclusion Error"<<endl;
             exit(1);
         } else { printversion(); }
     }
     if (g_flag) {
         if (h_flag || v_flag) {
             cout << "Exclusion Error: g" << endl;
-
+            cerr<<"Exclusion Error"<<endl;
             exit(1);
         } else { generate(path); }
     }
