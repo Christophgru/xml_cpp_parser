@@ -64,7 +64,7 @@ std::string generateHelpstr(const DHBW::filedata &xmldata) {
 
 void buildC(const DHBW::filedata &xmldata) {
     string c_code;
-    string path_c = "./output/" + xmldata.cfilename;
+    string path_c = "./output/Cfiles/" + xmldata.cfilename;
 
     //SOF Comment
     string startcomment = "//\n//This empty method body for the class" + xmldata.cfilename
@@ -73,13 +73,16 @@ void buildC(const DHBW::filedata &xmldata) {
     c_code += startcomment;
 
     //includes from hfile
-    c_code += "#include \"./" + xmldata.hfilename + "\" \n";
+    c_code += "#include \"../Hfiles/" + xmldata.hfilename + "\" \n";
     c_code += "#include <getopt.h>\n"
               "\n"
               "#include <iostream>\n"
               "\n"
               "using namespace std;\n\n\n";
-    c_code += "void " + xmldata.nameSpaceName + "::" + xmldata.classname + "::getOpts(int argc, char **argv) {\n";
+    c_code +=
+            "void " + ((xmldata.nameSpaceName != "-" && !xmldata.nameSpaceName.empty()) ? (xmldata.nameSpaceName + "::")
+                                                                                        : "") + xmldata.classname +
+            "::parseOptions(int argc, char **argv) {\n";
     c_code += "workingdir=argv[0];"
               "int i;\n"
               "    int optindex;\n";
@@ -124,10 +127,10 @@ void buildC(const DHBW::filedata &xmldata) {
     //create string with first letters
     string firstletter;
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
-        DHBW::opt optx=xmldata.optarr[i];
+        DHBW::opt optx = xmldata.optarr[i];
         firstletter += optx.shortOpt;
-        if(optx.hasargs!=DHBW::no_argument){
-            firstletter+=":";
+        if (optx.hasargs != DHBW::no_argument) {
+            firstletter += ":";
         }
     }
     c_code += "while ((i = getopt_long(argc, argv, \"" + firstletter + "\", longopts, &optindex)) >=0)\n" +
@@ -160,6 +163,10 @@ void buildC(const DHBW::filedata &xmldata) {
                 for (int k = 0; k < xmldata.optarr.size(); ++k) {
                     DHBW::opt opty = xmldata.optarr[k];
                     int currentexclusion = optx.exclusions[j] - 48;
+                    if (0 > currentexclusion || currentexclusion > 63) {
+                        printf("Integerwertebereich bei exclusions außerhalb 1-63");
+                        return;
+                    }
                     if (currentexclusion == opty.Ref) {
                         c_code += opty.shortOpt;
                         c_code += "_flag ||";
@@ -170,7 +177,8 @@ void buildC(const DHBW::filedata &xmldata) {
             c_code.pop_back();//delete last two ||
             c_code += "){\n cout << \"Exclusion Error: ";
             c_code += optx.shortOpt;
-            c_code += "\" << endl;\nexit(1);\n";
+            c_code += "\" << endl;\n"
+                      "\nexit(1);\n";
             c_code += "}else{"
                       //Methode aufrufen
                       + (optx.connectedtoInternalMethodName == "-" ? optx.connectedtoExternalMethodName
@@ -239,7 +247,7 @@ void buildC(const DHBW::filedata &xmldata) {
 void buildH(const DHBW::filedata &xmldata) {
 
     string h_code;
-    string path_h = "./output/" + xmldata.hfilename;
+    string path_h = "./output/Hfiles/" + xmldata.hfilename;
 
     //SOF Comment
     string startcomment = "//\n//This empty method body for the class" + xmldata.hfilename
@@ -254,7 +262,10 @@ void buildH(const DHBW::filedata &xmldata) {
     h_code += "#include <string>\n\n";
 
     //start namespace
-    h_code += "namespace " + xmldata.nameSpaceName + " {" + "\n\n";
+    if (xmldata.nameSpaceName != "-" && !xmldata.nameSpaceName.empty()) {
+        h_code += "namespace " + xmldata.nameSpaceName +
+                  " {" + "\n\n";
+    }
 
     //Klassenbeschreibung
     for (int i = 0; i < xmldata.overallDescription.size(); ++i) {
@@ -267,7 +278,7 @@ void buildH(const DHBW::filedata &xmldata) {
     //build interfaces
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
         DHBW::opt optx = xmldata.optarr[i];
-        if (!(optx.interface.empty() || optx.interface == "-")) {
+        if (!optx.interface.empty() && optx.interface != "-") {
             if (optx.interface == "helptext") {
                 h_code += "const std::string helptext=\"";
                 h_code += generateHelpstr(xmldata);
@@ -276,12 +287,14 @@ void buildH(const DHBW::filedata &xmldata) {
                 h_code += "const std::string version=\"" + (xmldata.version.empty() ? "tba" : xmldata.version) + "\";";
             } else {
                 if (optx.convertTo == "string") { optx.convertTo = "std::string"; }
-                h_code += (optx.convertTo.empty() ? "void" : optx.convertTo) + " " + optx.interface + ";\n";
+                h_code += (optx.convertTo.empty() ? "void" : optx.convertTo) + " " + optx.interface;
+                if (optx.deafaultValue != "-" && !optx.deafaultValue.empty()) { h_code += optx.deafaultValue; }
+                h_code += ";\n";
             }
         }
     }
 
-    h_code += "\n\nvoid getOpts(int argc, char **argv);\n\n";
+    h_code += "\n\nvoid parseOptions(int argc, char **argv);\n\n";
 
     //build external method declarations
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
@@ -322,7 +335,8 @@ void buildH(const DHBW::filedata &xmldata) {
     h_code += "}\n;";
 
     //klammer zu namespace
-    h_code += "}\n";
+    if (xmldata.nameSpaceName != "-" && !xmldata.nameSpaceName.empty()) { h_code += "}\n"; }
+
 
     //klammer zu kompiler includeguard
     h_code += "\n#endif";
