@@ -34,7 +34,7 @@ const std::string helptext="Overall Description:"
 " ShortOpt: g LongOpt: generate Description: Gibt XML an die eingelesen werden soll"
  
 "Kontaktdaten:"
-"Autoren: Jonas Heiss Email: Jonas.Heiss@AliExpress.com";const std::string version="tba";std::string path;
+"Autoren: Jonas Heiss Email: Christoph@familie-gruender.de";const std::string version="tba";std::string path;
 
 
 void parseOptions(int argc, char **argv);

@@ -1,5 +1,5 @@
 //
-//This empty method body for the classabstractXMLparser.cpp was created by Jonas Heiss on 07/21/2022 contact me under110
+//This empty method body for the classabstractXMLparser.cpp was created by Jonas Heiss on 07/21/2022 contact me under015207619839
 //
 #include "../Hfiles/abstractXMLparser.h" 
 #include <getopt.h>
@@ -36,20 +36,17 @@ break;
 if(h_flag){
 if(  v_flag ||g_flag ){
  cout << "Exclusion Error: h" << endl;
-
-exit(1);
+ cerr << "Exclusion Error "<<endl;
 }else{printhelp(); }
 }if(v_flag){
 if(  h_flag ||g_flag ){
  cout << "Exclusion Error: v" << endl;
-
-exit(1);
+ cerr << "Exclusion Error "<<endl;
 }else{printversion(); }
 }if(g_flag){
 if(  h_flag ||v_flag ){
  cout << "Exclusion Error: g" << endl;
-
-exit(1);
+ cerr << "Exclusion Error "<<endl;
 }else{generate(path); }
 }}void DHBW::abstractXMLparser::printhelp() {
 printf("%s",helptext.data());
