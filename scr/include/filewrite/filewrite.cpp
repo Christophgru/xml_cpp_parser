@@ -1,22 +1,46 @@
-//
-// Created by chris on 6/2/2022.
-//
+/**
+ * @file
+ * @author  Christoph Gründer, Yannic Grafwallner
+ * @email Christoph\@familie-gruender.de
+ * @version 1.0
+ *
+ * @section
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @section DESCRIPTION
+ *
+ * This file generates the c- and h-code
+ */
 #include <ctime>
 #include "../../XMLparser.h"
 #include<fstream>
 
 using namespace std;
 
-int write_data(const string &text, const string &name) {
+/**
+ * writes data of type string to a path
+ *
+ * @param data data
+ * @param path path
+ * @return
+ */
+int write_data(const string &data, const string &path) {
 
     ofstream file;
-    file.open(name, ios::out);
-    file << text;
+    file.open(path, ios::out);
+    file << data;
     file.close();
 
 
 }
 
+/**
+ * returns current time oin local machine
+ * @return string in format "%m/%d/%Y"
+ */
 string get_date() {
     time_t t = time(nullptr);
     tm *now = localtime(&t);
@@ -26,6 +50,12 @@ string get_date() {
     return buffer;
 }
 
+/**
+ * gets enum, returns the name of the passed option
+ *
+ * @param args
+ * @return string of name
+ */
 string getnameofenum(DHBW::hasArgs args) {
 
     if (args == DHBW::required_argument) { return "required_argument"; }
@@ -33,21 +63,25 @@ string getnameofenum(DHBW::hasArgs args) {
     else { return "no_argument"; }
 };
 
-
+/**
+ * generates the helpstring from the passed xmldata
+ * @param xmldata
+ * @return string containing helpstring
+ */
 std::string generateHelpstr(const DHBW::filedata &xmldata) {
     string hilfetext;
-    hilfetext += "Overall Description:\"\n";
+    hilfetext += "Overall Description:\\n\"\n";
     for (int i = 0; i < xmldata.overallDescription.size(); ++i) {
         hilfetext += "\"" + data(xmldata.overallDescription)[i];
-        hilfetext += "\"\n";
+        hilfetext += "\\n\\n\"\n";
     }
-    hilfetext += "\n\"Sample Usage:\"\n";
+    hilfetext += "\n\"Sample Usage:\\n\\n\"\n";
 
     for (int i = 0; i < xmldata.sampleUsage.size(); ++i) {
         hilfetext += "\"" + data(xmldata.sampleUsage)[i];
-        hilfetext += "\"\n";
+        hilfetext += "\\n\\n\"\n";
     }
-    hilfetext += "\n\"Options:\"\n";
+    hilfetext += "\n\"Options:\\n\\n\"\n";
 
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
         DHBW::opt optx = data(xmldata.optarr)[i];
@@ -55,21 +89,46 @@ std::string generateHelpstr(const DHBW::filedata &xmldata) {
         to_string(optx.shortOpt).empty() ? hilfetext += "Keine ShortOpt " : hilfetext += optx.shortOpt;
         hilfetext += " LongOpt: ";
         hilfetext += optx.longOpt.empty() ? "Keine LongOpt " : optx.longOpt;
-        hilfetext += " Description: " + optx.description + "\"\n";
+        hilfetext += " Description: " + optx.description + "\\n\\n\"\n";
     }
-    hilfetext += " \n\"Kontaktdaten:\"\n\"Autoren: " + xmldata.author + " Email: " + xmldata.email;
+    hilfetext += " \n\"Kontaktdaten:\\n\\n\"\n\"Autoren: " + xmldata.author + " Email: " + xmldata.email;
     return hilfetext;
 }
 
 
+/**
+ * builds a c file from filedata and writes it to output/Cfiles/[filename]
+ *
+ *
+ * @param xmldata
+ */
 void buildC(const DHBW::filedata &xmldata) {
     string c_code;
     string path_c = "./output/Cfiles/" + xmldata.cfilename;
 
     //SOF Comment
-    string startcomment = "//\n//This empty method body for the class" + xmldata.cfilename
-                          + " was created by " + xmldata.author + " on " + get_date() + " contact me under" +
-                          xmldata.telephonenumber + "\n//\n";
+
+    string startcomment = "/**\n"
+                          " * @file" + xmldata.cfilename + "\n"
+                                                           " * @author  " + xmldata.author + "\n"
+                                                                                             " * @email " +
+                          xmldata.email + "\n"
+                                          " * @phone " + xmldata.telephonenumber + "\n"
+                                                                                   " * @date " + get_date() + "\n"
+                                                                                                              " * @version " +
+                          xmldata.version + "\n"
+                                            " *\n"
+                                            " * @section\n"
+                                            " *\n"
+                                            " * This program is distributed in the hope that it will be useful, but\n"
+                                            " * WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+                                            " * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+                                            " *\n"
+                                            " * @section DESCRIPTION\n"
+                                            " *\n"
+                                            " * This C-file was generated by the XML_CPP code generator by Group Immmibase\n"
+                                            " */";
+
     c_code += startcomment;
 
     //includes from hfile
@@ -218,15 +277,27 @@ void buildC(const DHBW::filedata &xmldata) {
                           "        count++;\n"
                           "        if (text[i] != ' ' && check) {\n"
                           "            space_count++;\n"
+                          "        } else if (text[i] == '\\n') {\n"
+                          "            space_count = 0;\n"
+                          "            count = 0;\n"
                           "        } else {\n"
                           "            space_count = 0;\n"
                           "            check = true;\n"
                           "        }\n"
                           "        if (count % signsperline == 0 && i != 0) {\n"
-                          "            text[i - space_count] = '\\n';\n"
-                          "            count = space_count;\n"
+                          "            if (count != signsperline) {\n"
+                          "                int index = i - signsperline * (count / signsperline - 1);\n"
+                          "                text.insert(index, 1, '-');\n"
+                          "                text.insert(index + 1, 1, '\\n');\n"
+                          "                count = space_count;\n"
+                          "            } else {\n"
+                          "                text[i - space_count] = '\\n';\n"
+                          "\n"
+                          "                count = space_count;\n"
+                          "            }\n"
                           "        }\n"
-                          "    }return text;\n"
+                          "    }\n"
+                          "    return text + \"\\n\\n\\n\";\n"
                           "}";
                 c_code += "void DHBW::abstractXMLparser::print" + optx.longOpt + "() {\n";
                 c_code += "printf(\"%s\", helptextformatierung(helptext,signperline).data());\n}";
@@ -247,13 +318,16 @@ void buildC(const DHBW::filedata &xmldata) {
             if (optx.hasargs != DHBW::no_argument) {
                 //getter
                 c_code += optx.convertTo + " " + xmldata.nameSpaceName + "::" + xmldata.classname + "::getValueOf" +
-                          optx.interface + "(){\n";
+                          optx.interface + "(){\n" + "if(" + optx.interface + "!=";
                 if (optx.hasargs != DHBW::optional_argument) {
-                    c_code +=
-                            "if(" + optx.interface + "!=\"" + optx.deafaultValue + "\"||" + optx.interface +
-                            "!= \"\"){return " +
-                            optx.interface +
-                            ";}";
+                    if (optx.convertTo == "int") {
+                        c_code +=
+                                optx.deafaultValue;
+                    } else {
+                        c_code += "\"" + optx.deafaultValue + "\"||" + optx.interface +
+                                  "!= \"\"";
+                    }
+                    c_code += "){return " + optx.interface + ";}";
                 }
                 c_code += " return " + optx.interface + ";\n}\n\n";
             }
@@ -277,15 +351,36 @@ void buildC(const DHBW::filedata &xmldata) {
     );
 }
 
-
+/**
+ * builds a c file from filedata and writes it to output/Cfiles/[filename]
+ * @param xmldata
+ */
 void buildH(const DHBW::filedata &xmldata) {
 
     string h_code;
     string path_h = "./output/Hfiles/" + xmldata.hfilename;
 
     //SOF Comment
-    string startcomment = "//\n//This empty method body for the class" + xmldata.hfilename
-                          + " was created by " + xmldata.author + " on " + get_date() + "\n//\n\n";
+    string startcomment = "/**\n"
+                          " * @file" + xmldata.cfilename + "\n" +
+                          " * @author  " + xmldata.author + "\n" +
+                          " * @email " + xmldata.email + "\n" +
+                          " * @phone " + xmldata.telephonenumber + "\n"
+                                                                   " * @date " +
+                          get_date() + "\n" +
+                          " * @version " +
+                          xmldata.version + "\n"
+                                            " *\n"
+                                            " * @section\n"
+                                            " *\n"
+                                            " * This program is distributed in the hope that it will be useful, but\n"
+                                            " * WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+                                            " * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+                                            " *\n"
+                                            " * @section DESCRIPTION\n"
+                                            " *\n"
+                                            " * This Header file was generated by the XML_CPP code generator by Group Immmibase\n"
+                                            " */";
     h_code += startcomment;
 
     //include Guards
@@ -303,7 +398,7 @@ void buildH(const DHBW::filedata &xmldata) {
 
     //Klassenbeschreibung
     for (int i = 0; i < xmldata.overallDescription.size(); ++i) {
-        h_code += "//" + xmldata.overallDescription[i] + "\n";
+        h_code += "///" + xmldata.overallDescription[i] + "\n";
     }
 
     //start class
@@ -328,7 +423,11 @@ void buildH(const DHBW::filedata &xmldata) {
         }
     }
 
-    h_code += "\n\nvoid parseOptions(int argc, char **argv);\n\n";
+    h_code += "\n/***\n"
+              " * should be called from main for excecutionof opts\n"
+              " * @param argc \n"
+              " * @param argv \n"
+              " */\nvoid parseOptions(int argc, char **argv);\n\n";
 
     //build external method declarations
     for (int i = 0; i < xmldata.optarr.size(); ++i) {
@@ -336,11 +435,11 @@ void buildH(const DHBW::filedata &xmldata) {
 
         //generate internal methods
         //Kommentar für jede Methode
-        h_code += "//" + optx.description + "\n";
+        h_code += "///" + optx.description + "\n";
 
         //Methodendeklaration
         if (optx.connectedtoInternalMethodName == "printhelp") { h_code += "protected:"; }
-        if (optx.connectedtoInternalMethodName != "-") {
+        if (optx.connectedtoInternalMethodName != "-"&&!optx.connectedtoInternalMethodName.empty()) {
             h_code += "void " + optx.connectedtoInternalMethodName + "();" + "\n\n";
         }
         //generate external methods
@@ -353,9 +452,10 @@ void buildH(const DHBW::filedata &xmldata) {
         if (optx.interface != "-" && !optx.interface.empty()) {
             if (optx.hasargs != DHBW::no_argument) {
                 //getter
-                h_code +=
+                string x=
                         (optx.convertTo == "string" ? "std::string" : optx.convertTo) + " getValueOf" + optx.interface +
                         "();\n\n";
+                h_code +=x;
 
             }
             //is set

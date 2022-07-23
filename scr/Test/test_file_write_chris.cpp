@@ -1,10 +1,26 @@
-//
-// Created by chris on 6/22/2022.
-//
-
+/**
+ * @file
+ * @author  Christoph Gründer
+ * @email Christoph\@familie-gruender.de
+ * @version 1.0
+ *
+ * @section
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @section DESCRIPTION
+ *
+ * For test purposes only
+ */
 #include "../include/filewrite/filewrite.h"
 
-
+/**
+ * mockup main, for test purposes
+ *
+ * @return
+ */
 int main() {
     DHBW::filedata mockdata;
     mockdata.SignPerLine = "80";

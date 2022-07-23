@@ -1,5 +1,5 @@
 //
-// Created by chris on 6/8/2022.
+// Created by elias on 6/8/2022.
 //
 
 #include "readXML.h"
@@ -13,21 +13,37 @@ XERCES_CPP_NAMESPACE_USE
 #include <codecvt>
 #include <string>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 using namespace DHBW;
 
+bool cmp (const opt& i,const opt& j)
+{
+    string checki;
+    string checkj;
+    if(i.longOpt.empty()){
+        checki = i.shortOpt;
+    }
+    else{
+        checki = i.longOpt;
+    }
+    if(j.longOpt.empty()){
+        checkj = j.shortOpt;
+    }
+    else{
+        checkj = j.longOpt;
+    }
+    return (checki<checkj);
+}
 class SimpleSAXParser : public HandlerBase {
 public:
     void startDocument() override {
-        //cout << "Dokument beginnt!" << endl;
     }
-
     void endDocument() override {
-        //cout << "Dokument ist zu Ende!" << endl;
+        sort(classdata.optarr.begin(), classdata.optarr.end(), &cmp);
     }
 
     void startElement(const XMLCh* const name, AttributeList& attributes) override {
-        //cout <<XMLString::transcode(name) << endl;
         start = XMLString::transcode(name);
 
 
@@ -47,7 +63,6 @@ public:
     }
 
     void characters(const XMLCh* const chars, const XMLSize_t length) override {
-        //cout << "Buchstaben (" << length << "):" << XMLString::transcode(chars) << endl;
         setStruct(start, XMLString::transcode(chars));
     }
     filedata getClassdata()
@@ -64,33 +79,34 @@ private:
     {
         options.Ref = 0;//standardmäßig 0 wird genutzt für excludes
         options.shortOpt = '-';
-        options.longOpt = '-';
+        options.longOpt = "";
         options.interface = '-';
         options.exclusions.clear();//Ref der Opts die nicht mit dieser aufgerufen werden dürfen
         options.convertTo = '-'; //Datentyp des folgeparameters
         options.deafaultValue = '-';
-        options.connectedtoInternalMethodName = "-";
-        options.connectedtoExternalMethodName = "-";
+        options.connectedtoInternalMethodName = "";
+        options.connectedtoExternalMethodName = "";
         options.hasargs = no_argument;
         options.description = '-';
     }
-    void getExclusions(string value)
+    void getExclusions(const string& value)
     {
         for(char i : value)
         {
             if(i != ',')options.exclusions.push_back(i);
         }
     }
-    void setStruct(string start, string key, string value)
+    void setStruct(const string& name, const string& key, string value)
     {
-        if(start == "Author")
+        if(name == "Author")
         {
             if(key == "Name")classdata.author = value;
             else if(key == "Phone")classdata.telephonenumber = value;
             else if(key =="Mail")classdata.email = value;
         }
-        else if(start=="GetOptSetup") classdata.SignPerLine = value;
-        else if(start == "Option")
+
+        else if(name=="GetOptSetup") classdata.SignPerLine = value;
+        else if(name == "Option")
         {
             if(key == "Ref")options.Ref = stoi(value);
             else if(key == "ShortOpt")options.shortOpt = value.at(0);
@@ -109,11 +125,12 @@ private:
         }
     }
 
-    void setStruct(string startelement, string value)
+    void setStruct(const string& startelement, const string& value)
     {
 
         if(value != "\n\t" && value != "\n\t\t"&&value.substr(0,1)!="\n") {
             if(startelement == "HeaderFileName")classdata.hfilename = value;
+            else if(startelement=="Version")classdata.version=value;
             else if(startelement == "SourceFileName")classdata.cfilename = value;
             else if(startelement == "NameSpace")classdata.nameSpaceName = value;
             else if(startelement == "ClassName")classdata.classname = value;
@@ -128,7 +145,7 @@ private:
 
 
 
-void readXML(std::string path, DHBW::filedata& tofill)
+void readXML(const string& path, DHBW::filedata& tofill)
 {
     const char *charpath = path.c_str();
     try {
@@ -153,7 +170,6 @@ void readXML(std::string path, DHBW::filedata& tofill)
         parser->setDocumentHandler(&handler);
         parser->parse(charpath);
         errorCount = parser->getErrorCount();
-
         tofill = handler.getClassdata();
 
     }
@@ -164,21 +180,11 @@ void readXML(std::string path, DHBW::filedata& tofill)
     catch (const XMLException& toCatch)
     {
         char* message = XMLString::transcode(toCatch.getMessage());
-
-        //XMLString::release(message);
-        /*
-        XERCES_STD_QUALIFIER cerr << "\nAn error occurred\n  Error: "
-                                  << StrX(toCatch.getMessage())
-                                  << "\n" << XERCES_STD_QUALIFIER endl;
-                                  */
         cerr << "XMLException: " << message << endl;
     }
     catch(...) {
         cerr << "Unbekannter Fehler" << endl;
     }
-
-
-    //cout << "Anzahl Fehler: " << errorCount << endl;
 
     //Parser sauber beenden
     delete parser;
