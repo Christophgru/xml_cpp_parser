@@ -3,7 +3,7 @@
 <GetOptSetup SignPerLine="79">
 
     <Author Mail="Christoph@familie-gruender.de" Phone="015207619839"
-            Name="Jonas Heiss"/>
+            Name="Jonas Heiss, Yannic Grafwallner, Ali Guendogan, Elias Keimer, Christoph Gruender"/>
 
     <HeaderFileName>abstractXMLparser.h</HeaderFileName>
 
@@ -53,7 +53,7 @@
         <Option Description="Gibt XML an die eingelesen werden soll" ConnectToExternalMethod="generate" ShortOpt="g"
                 LongOpt="generate" HasArguments="Required"
                 interface="path" Ref="3" Exclusion="1,2" convertTo="string"/>
-        <Option Description="Setzte sign per line"  DefaultValue="79" Exclusion="3"
+        <Option Description="Setzte sign per line"  DefaultValue="79" Exclusion="3" HasArguments="Required"
                 interface="signperline" LongOpt="signperline" ShortOpt="s" Ref="4" convertTo="int" />
         <!-- Option makeC erstellt eine File-->
 
