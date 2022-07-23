@@ -4,7 +4,7 @@
  * @email Christoph@familie-gruender.de
  * @phone 015207619839
  * @date 07/23/2022
- * @version 
+ * @version 1.2
  *
  * @section
  *
@@ -22,15 +22,16 @@
 
 namespace DHBW {
 
-//Erstellt einen Rumpf zum einlesen von Argumente aus der Kommandozeile.
-//Es kann sowohl mit innenliegenden Container wie externer Klassenanbindung eine Datenhaltung erfolgen.
-//Sobald ein Methodenaufruf abstrakt ist, wird die Basisklasse abstrakt.
-//Fuer die Formatierung der generierten Dateien wird astyle verwendet.
+///Erstellt einen Rumpf zum einlesen von Argumente aus der Kommandozeile.
+///Es kann sowohl mit innenliegenden Container wie externer Klassenanbindung eine Datenhaltung erfolgen.
+///Sobald ein Methodenaufruf abstrakt ist, wird die Basisklasse abstrakt.
+///Fuer die Formatierung der generierten Dateien wird astyle verwendet.
 
 class abstractXMLparser{
 
  public:
  std::string workingdir;
+std::string path;
 const std::string helptext="Overall Description:\n"
 "Erstellt einen Rumpf zum einlesen von Argumente aus der Kommandozeile.\n\n"
 "Es kann sowohl mit innenliegenden Container wie externer Klassenanbindung eine Datenhaltung erfolgen.\n\n"
@@ -42,43 +43,42 @@ const std::string helptext="Overall Description:\n"
 "getoptgen [--out-path] ... QUELLE\n\n"
 
 "Options:\n\n"
-" ShortOpt: h LongOpt: help Description: Diese Hilfe ausgeben und beenden\n\n"
-" ShortOpt: v LongOpt: - Description: Gibt die Version des Programms aus und beendet\n\n"
 " ShortOpt: g LongOpt: generate Description: Gibt XML an die eingelesen werden soll\n\n"
+" ShortOpt: h LongOpt: help Description: Diese Hilfe ausgeben und beenden\n\n"
 " ShortOpt: s LongOpt: signperline Description: Setzte sign per line\n\n"
+" ShortOpt: v LongOpt: Keine LongOpt  Description: Gibt die Version des Programms aus und beendet\n\n"
  
 "Kontaktdaten:\n\n"
-"Autoren: Jonas Heiss, Yannic Grafwallner, Ali Guendogan, Elias Keimer, Christoph Gruender Email: Christoph@familie-gruender.de";const std::string version="tba";std::string path;
-int signperline=79;
-
+"Autoren: Jonas Heiss, Yannic Grafwallner, Ali Guendogan, Elias Keimer, Christoph Gruender Email: Christoph@familie-gruender.de";int signperline=79;
+const std::string version="1.2";
 /***
  * should be called from main for excecutionof opts
- * @param argc
- * @param argv
+ * @param argc 
+ * @param argv 
  */
 void parseOptions(int argc, char **argv);
 
-//Diese Hilfe ausgeben und beenden
-protected:void printhelp();
-
-bool isSethelptext();
-
-//Gibt die Version des Programms aus und beendet
-void printversion();
-
-bool isSetversion();
-
-//Gibt XML an die eingelesen werden soll
+///Gibt XML an die eingelesen werden soll
 virtual void generate(std::string path)=0;
 
 std::string getValueOfpath();
 
 bool isSetpath();
 
-//Setzte sign per line
+///Diese Hilfe ausgeben und beenden
+protected:void printhelp();
+
+bool isSethelptext();
+
+///Setzte sign per line
 int getValueOfsignperline();
 
 bool isSetsignperline();
+
+///Gibt die Version des Programms aus und beendet
+void printversion();
+
+bool isSetversion();
 
 }
 ;}

@@ -4,7 +4,7 @@
  * @email Christoph@familie-gruender.de
  * @phone 015207619839
  * @date 07/23/2022
- * @version 
+ * @version 1.2
  *
  * @section
  *
@@ -26,52 +26,58 @@ using namespace std;
 void DHBW::abstractXMLparser::parseOptions(int argc, char **argv) {
 workingdir=argv[0];int i;
     int optindex;
-bool h_flag = false;bool v_flag = false;bool g_flag = false;bool s_flag = false;
+bool g_flag = false;bool h_flag = false;bool s_flag = false;bool v_flag = false;
     const struct option longopts[] =
-            {{"help", no_argument, nullptr, 'h'},{"generate", required_argument, nullptr, 'g'},{"signperline", required_argument, nullptr, 's'}
+            {{"generate", required_argument, nullptr, 'g'},{"help", no_argument, nullptr, 'h'},{"signperline", required_argument, nullptr, 's'},{"", no_argument, nullptr, 'v'}
 };
 
-while ((i = getopt_long(argc, argv, "hvg:s:", longopts, &optindex)) >=0)
+while ((i = getopt_long(argc, argv, "g:hs:v", longopts, &optindex)) >=0)
 switch(i){
 
-case 'h':
-h_flag =true;
- break;
-case 'v':
-v_flag =true;
- break;
 case 'g':
  path=argv[argc-1];
 g_flag =true;
  break;
+case 'h':
+h_flag =true;
+ break;
 case 's':
  signperline=atoi(argv[argc-1]);
 s_flag =true;
+ break;
+case 'v':
+v_flag =true;
  break;default:
 break;
 }
 
-if(h_flag){
+if(g_flag){
+if(  h_flag ||v_flag ){
+ cout << "Exclusion Error: g" << endl;
+ cerr << "Exclusion Error "<<endl;
+}else{(generate(path)); }
+}if(h_flag){
 if(  v_flag ||g_flag ){
  cout << "Exclusion Error: h" << endl;
  cerr << "Exclusion Error "<<endl;
 }else{printhelp(); }
+}if(s_flag){
+if(  g_flag ){
+ cout << "Exclusion Error: s" << endl;
+ cerr << "Exclusion Error "<<endl;
+}else{(signperline); }
 }if(v_flag){
 if(  h_flag ||g_flag ){
  cout << "Exclusion Error: v" << endl;
  cerr << "Exclusion Error "<<endl;
 }else{printversion(); }
-}if(g_flag){
-if(  h_flag ||v_flag ){
- cout << "Exclusion Error: g" << endl;
- cerr << "Exclusion Error "<<endl;
-}else{generate(path); }
-}if(s_flag){
-if(  g_flag ){
- cout << "Exclusion Error: s" << endl;
- cerr << "Exclusion Error "<<endl;
-}else{signperline; }
-}}string helptextformatierung(string text, int signsperline) {
+}}string DHBW::abstractXMLparser::getValueOfpath(){
+if(path!="-"||path!= ""){return path;} return path;
+}
+
+bool DHBW::abstractXMLparser::isSetpath() {
+    return !(path.empty());
+}string helptextformatierung(string text, int signsperline) {
     int space_count = 0;
     bool check = false;
     int count = -1;
@@ -104,20 +110,14 @@ if(  g_flag ){
 printf("%s", helptextformatierung(helptext,signperline).data());
 }bool DHBW::abstractXMLparser::isSethelptext() {
     return !(helptext.empty());
-}void DHBW::abstractXMLparser::printversion() {
-printf("Your current Version is: %s",version.data());
-}bool DHBW::abstractXMLparser::isSetversion() {
-    return !(version.empty());
-}string DHBW::abstractXMLparser::getValueOfpath(){
-if(path!="-"||path!= ""){return path;} return path;
-}
-
-bool DHBW::abstractXMLparser::isSetpath() {
-    return !(path.empty());
 }int DHBW::abstractXMLparser::getValueOfsignperline(){
 if(signperline!=79){return signperline;} return signperline;
 }
 
 bool DHBW::abstractXMLparser::isSetsignperline() {
     return !(signperline!=79);
+}void DHBW::abstractXMLparser::printversion() {
+printf("Your current Version is: %s",version.data());
+}bool DHBW::abstractXMLparser::isSetversion() {
+    return !(version.empty());
 }

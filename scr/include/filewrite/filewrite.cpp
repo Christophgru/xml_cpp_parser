@@ -439,7 +439,7 @@ void buildH(const DHBW::filedata &xmldata) {
 
         //Methodendeklaration
         if (optx.connectedtoInternalMethodName == "printhelp") { h_code += "protected:"; }
-        if (optx.connectedtoInternalMethodName != "-") {
+        if (optx.connectedtoInternalMethodName != "-"&&!optx.connectedtoInternalMethodName.empty()) {
             h_code += "void " + optx.connectedtoInternalMethodName + "();" + "\n\n";
         }
         //generate external methods
@@ -452,9 +452,10 @@ void buildH(const DHBW::filedata &xmldata) {
         if (optx.interface != "-" && !optx.interface.empty()) {
             if (optx.hasargs != DHBW::no_argument) {
                 //getter
-                h_code +=
+                string x=
                         (optx.convertTo == "string" ? "std::string" : optx.convertTo) + " getValueOf" + optx.interface +
                         "();\n\n";
+                h_code +=x;
 
             }
             //is set
