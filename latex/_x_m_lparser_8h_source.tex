@@ -2,66 +2,60 @@
 \label{_x_m_lparser_8h_source}\index{scr/XMLparser.h@{scr/XMLparser.h}}
 \mbox{\hyperlink{_x_m_lparser_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{1 \textcolor{comment}{//}}
-\DoxyCodeLine{2 \textcolor{comment}{// Created by chris on 6/2/2022.}}
-\DoxyCodeLine{3 \textcolor{comment}{//}}
-\DoxyCodeLine{4 \textcolor{preprocessor}{\#ifndef XMLPARSER\_H}}
-\DoxyCodeLine{5 \textcolor{preprocessor}{\#define XMLPARSER\_H}}
-\DoxyCodeLine{6 }
-\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <string>}}
-\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}vector"{}}}
-\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}generated/Hfiles/abstractXMLparser.h"{}}}
-\DoxyCodeLine{10 }
-\DoxyCodeLine{11 \textcolor{keyword}{using namespace }std;}
-\DoxyCodeLine{12 }
-\DoxyCodeLine{13 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_d_h_b_w}{DHBW}} \{}
-\DoxyCodeLine{14     \textcolor{keyword}{enum} \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0a}{hasArgs}} \{}
-\DoxyCodeLine{15         \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0aa0542ba9428606ef54b7df1e31085a266}{no\_argument}}, \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0aa541863ab46d0661fec4f292f18fadf04}{optional\_argument}}, \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0aa83d7738e603a12cb8bc897c644f030bc}{required\_argument}}}
-\DoxyCodeLine{16     \};}
-\DoxyCodeLine{17     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_d_h_b_w_1_1opt}{opt}} \{}
-\DoxyCodeLine{18         \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_ab5ee679fbd322eb55c81f389d2d21f31}{Ref}} = 0;\textcolor{comment}{//standardmäßig 0 wird genutzt für excludes}}
-\DoxyCodeLine{19         \textcolor{keywordtype}{char32\_t} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a25de0a27663eacede7e9d68ee4cfbf65}{shortOpt}} = \textcolor{charliteral}{'-\/'};}
-\DoxyCodeLine{20         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a1a4a240e095ad9598a7ff127f56e3700}{longOpt}};}
-\DoxyCodeLine{21         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a3ea5270efffb85444655a1c594cbf5c8}{interface}};}
-\DoxyCodeLine{22         vector<uint8\_t> \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a05ce7fe9e6c75306f8f01daf03744935}{exclusions}};\textcolor{comment}{//Ref der Opts die nicht mit dieser aufgerufen werden dürfen}}
-\DoxyCodeLine{23         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a44871832c5904538315371540bd4f5d5}{convertTo}}; \textcolor{comment}{//Datentyp des folgeparameters}}
-\DoxyCodeLine{24         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a0db650f7b216ff20352925cb00f8b1d1}{deafaultValue}};}
-\DoxyCodeLine{25         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a31e672110cadeb9a9bfdc6e026d5335a}{connectedtoInternalMethodName}};}
-\DoxyCodeLine{26         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a550d85b4601f54e5cb3493bec81c9f0d}{connectedtoExternalMethodName}};}
-\DoxyCodeLine{27         \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0a}{hasArgs}} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_afd835c9d4cf9c89bbd4de6a80befe47b}{hasargs}} = \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0aa0542ba9428606ef54b7df1e31085a266}{no\_argument}};}
-\DoxyCodeLine{28         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a21928e399d96ecf6e7cb96a0014016b2}{description}};}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef XMLPARSER\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define XMLPARSER\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include "{}vector"{}}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}generated/Hfiles/abstractXMLparser.h"{}}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{25 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_d_h_b_w}{DHBW}} \{}
+\DoxyCodeLine{27     \textcolor{keyword}{enum} \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0a}{hasArgs}} \{}
+\DoxyCodeLine{28         \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0aa0542ba9428606ef54b7df1e31085a266}{no\_argument}}, \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0aa541863ab46d0661fec4f292f18fadf04}{optional\_argument}}, \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0aa83d7738e603a12cb8bc897c644f030bc}{required\_argument}}}
 \DoxyCodeLine{29     \};}
-\DoxyCodeLine{30     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_d_h_b_w_1_1filedata}{filedata}} \{}
-\DoxyCodeLine{31         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_adaea0e49562a7056d265577c0735f573}{version}};}
-\DoxyCodeLine{32         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a19d573a71cc2b4a2dce70e5ad115c93a}{SignPerLine}};}
-\DoxyCodeLine{33         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a130744c28944a27ef789ab65ab144e49}{hfilename}};}
-\DoxyCodeLine{34         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a20602fc6fef33dcd5dbb351da2e97dee}{cfilename}};}
-\DoxyCodeLine{35         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a43ff8f0323b0faaef446575f866288dd}{nameSpaceName}};}
-\DoxyCodeLine{36         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a406654e64936ebda5b541ef5e7e16364}{classname}};}
-\DoxyCodeLine{37         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a251faf918c543458b053c35edde873e4}{author}};}
-\DoxyCodeLine{38         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a6773b69906888259844ca1597bf5d83e}{telephonenumber}};}
-\DoxyCodeLine{39         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a4168b81e2a71d40d6accd72a0066d19a}{email}};}
-\DoxyCodeLine{40         vector<string> \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a2872a5bc9729d4505482f19d4bd492fc}{overallDescription}};}
-\DoxyCodeLine{41         vector<string> \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a806a284fd69801ee16327a10d9dd0f85}{sampleUsage}};}
-\DoxyCodeLine{42         vector<opt> \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a0097c9d422fe4f957b410a4684e03a4e}{optarr}};}
+\DoxyCodeLine{31     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_d_h_b_w_1_1opt}{opt}} \{}
+\DoxyCodeLine{32         \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_ab5ee679fbd322eb55c81f389d2d21f31}{Ref}} = 0;\textcolor{comment}{//standardmäßig 0 wird genutzt für excludes}}
+\DoxyCodeLine{33         \textcolor{keywordtype}{char32\_t} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a25de0a27663eacede7e9d68ee4cfbf65}{shortOpt}} = \textcolor{charliteral}{'-\/'};}
+\DoxyCodeLine{34         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a1a4a240e095ad9598a7ff127f56e3700}{longOpt}};}
+\DoxyCodeLine{35         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a3ea5270efffb85444655a1c594cbf5c8}{interface}};}
+\DoxyCodeLine{36         vector<uint8\_t> \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a05ce7fe9e6c75306f8f01daf03744935}{exclusions}};\textcolor{comment}{//Ref der Opts die nicht mit dieser aufgerufen werden dürfen}}
+\DoxyCodeLine{37         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a44871832c5904538315371540bd4f5d5}{convertTo}}; \textcolor{comment}{//Datentyp des folgeparameters}}
+\DoxyCodeLine{38         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a0db650f7b216ff20352925cb00f8b1d1}{deafaultValue}};}
+\DoxyCodeLine{39         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a31e672110cadeb9a9bfdc6e026d5335a}{connectedtoInternalMethodName}};}
+\DoxyCodeLine{40         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a550d85b4601f54e5cb3493bec81c9f0d}{connectedtoExternalMethodName}};}
+\DoxyCodeLine{41         \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0a}{hasArgs}} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_afd835c9d4cf9c89bbd4de6a80befe47b}{hasargs}} = \mbox{\hyperlink{namespace_d_h_b_w_a89a530ec9aa8772246f9826bb3954b0aa0542ba9428606ef54b7df1e31085a266}{no\_argument}};}
+\DoxyCodeLine{42         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1opt_a21928e399d96ecf6e7cb96a0014016b2}{description}};}
 \DoxyCodeLine{43     \};}
-\DoxyCodeLine{44 }
-\DoxyCodeLine{45     \textcolor{keyword}{class }\mbox{\hyperlink{class_d_h_b_w_1_1_x_m_lparser}{XMLparser}} : \textcolor{keyword}{public} abstractXMLparser \{}
-\DoxyCodeLine{46 }
-\DoxyCodeLine{47     \textcolor{keyword}{public}:}
-\DoxyCodeLine{48         \mbox{\hyperlink{struct_d_h_b_w_1_1filedata}{filedata}} \mbox{\hyperlink{class_d_h_b_w_1_1_x_m_lparser_ada5781109837364d3412064aa7524d3a}{xmldata}};}
-\DoxyCodeLine{49 }
-\DoxyCodeLine{50         \mbox{\hyperlink{class_d_h_b_w_1_1_x_m_lparser_a294f0ba375a920c2cacd33a4b6fa8248}{XMLparser}}();}
-\DoxyCodeLine{51 }
-\DoxyCodeLine{52         \mbox{\hyperlink{class_d_h_b_w_1_1_x_m_lparser_a0d78c25121e5956e0c175b0250a49ab3}{\string~XMLparser}}();}
-\DoxyCodeLine{53 }
-\DoxyCodeLine{54 }
-\DoxyCodeLine{55     \textcolor{keyword}{private}:}
-\DoxyCodeLine{56         \textcolor{keywordtype}{void} generate(\textcolor{keywordtype}{string} path);}
-\DoxyCodeLine{57     \};}
-\DoxyCodeLine{58 }
-\DoxyCodeLine{59 \}}
-\DoxyCodeLine{60 }
-\DoxyCodeLine{61 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{45     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_d_h_b_w_1_1filedata}{filedata}} \{}
+\DoxyCodeLine{46         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_adaea0e49562a7056d265577c0735f573}{version}};}
+\DoxyCodeLine{47         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a19d573a71cc2b4a2dce70e5ad115c93a}{SignPerLine}};}
+\DoxyCodeLine{48         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a130744c28944a27ef789ab65ab144e49}{hfilename}};}
+\DoxyCodeLine{49         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a20602fc6fef33dcd5dbb351da2e97dee}{cfilename}};}
+\DoxyCodeLine{50         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a43ff8f0323b0faaef446575f866288dd}{nameSpaceName}};}
+\DoxyCodeLine{51         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a406654e64936ebda5b541ef5e7e16364}{classname}};}
+\DoxyCodeLine{52         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a251faf918c543458b053c35edde873e4}{author}};}
+\DoxyCodeLine{53         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a6773b69906888259844ca1597bf5d83e}{telephonenumber}};}
+\DoxyCodeLine{54         \textcolor{keywordtype}{string} \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a4168b81e2a71d40d6accd72a0066d19a}{email}};}
+\DoxyCodeLine{55         vector<string> \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a2872a5bc9729d4505482f19d4bd492fc}{overallDescription}};}
+\DoxyCodeLine{56         vector<string> \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a806a284fd69801ee16327a10d9dd0f85}{sampleUsage}};}
+\DoxyCodeLine{57         vector<opt> \mbox{\hyperlink{struct_d_h_b_w_1_1filedata_a0097c9d422fe4f957b410a4684e03a4e}{optarr}};}
+\DoxyCodeLine{58     \};}
+\DoxyCodeLine{62     \textcolor{keyword}{class }\mbox{\hyperlink{class_d_h_b_w_1_1_x_m_lparser}{XMLparser}} : \textcolor{keyword}{public} abstractXMLparser \{}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{keyword}{public}:}
+\DoxyCodeLine{68         \mbox{\hyperlink{struct_d_h_b_w_1_1filedata}{filedata}} \mbox{\hyperlink{class_d_h_b_w_1_1_x_m_lparser_ada5781109837364d3412064aa7524d3a}{xmldata}};}
+\DoxyCodeLine{72         \mbox{\hyperlink{class_d_h_b_w_1_1_x_m_lparser_a294f0ba375a920c2cacd33a4b6fa8248}{XMLparser}}();}
+\DoxyCodeLine{76         \mbox{\hyperlink{class_d_h_b_w_1_1_x_m_lparser_a0d78c25121e5956e0c175b0250a49ab3}{\string~XMLparser}}();}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \textcolor{keyword}{private}:}
+\DoxyCodeLine{84         \textcolor{keywordtype}{void} generate(\textcolor{keywordtype}{string} path);}
+\DoxyCodeLine{85     \};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}
