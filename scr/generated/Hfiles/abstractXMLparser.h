@@ -1,5 +1,5 @@
 //
-//This empty method body for the classabstractXMLparser.h was created by Jonas Heiss on 07/21/2022
+//This empty method body for the classabstractXMLparser.h was created by Jonas Heiss on 07/22/2022
 //
 
 #ifndef abstractXMLparser_H
@@ -32,16 +32,19 @@ namespace DHBW {
                                      " ShortOpt: h LongOpt: help Description: Diese Hilfe ausgeben und beenden"
                                      " ShortOpt: v LongOpt: - Description: Gibt die Version des Programms aus und beendet"
                                      " ShortOpt: g LongOpt: generate Description: Gibt XML an die eingelesen werden soll"
+                                     " ShortOpt: s LongOpt: signperline Description: Setzte sign per line"
 
                                      "Kontaktdaten:"
-                                     "Autoren: Jonas Heiss Email: Jonas.Heiss@AliExpress.com";
+                                     "Autoren: Jonas Heiss Email: Christoph@familie-gruender.de";
         const std::string version = "tba";
         std::string path;
+        int signperline = 79;
 
 
         void parseOptions(int argc, char **argv);
 
 //Diese Hilfe ausgeben und beenden
+    protected:
         void printhelp();
 
         bool isSethelptext();
@@ -57,6 +60,9 @@ namespace DHBW {
         std::string getValueOfpath();
 
         bool isSetpath();
+
+//Setzte sign per line
+        bool isSetsignperline();
 
     };
 }

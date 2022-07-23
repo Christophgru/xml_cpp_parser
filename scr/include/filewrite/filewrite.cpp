@@ -142,7 +142,8 @@ void buildC(const DHBW::filedata &xmldata) {
         c_code += "\':\n";
         //falls es einen übergabeparameter gab, hier casten und übergeben
         if (!(optx.convertTo.empty() || optx.convertTo == "-" || optx.interface == "version")) {
-            c_code += " " + optx.interface + "=argv[argc-1];\n";
+            c_code += " " + optx.interface + ((optx.convertTo == "int") ? "=atoi(argv[argc-1])" : "=argv[argc-1]") +
+                      ";\n";
         }
         c_code += optx.shortOpt;
         c_code += "_flag =true;\n break;";
@@ -178,14 +179,21 @@ void buildC(const DHBW::filedata &xmldata) {
             c_code += "){\n cout << \"Exclusion Error: ";
             c_code += optx.shortOpt;
             c_code += "\" << endl;\n cerr << \"Exclusion Error \"<<endl;\n";
-                      "\nexit(1);\n";
+            "\nexit(1);\n";
             c_code += "}else{"
                       //Methode aufrufen
-                      + (optx.connectedtoInternalMethodName == "-" ? optx.connectedtoExternalMethodName
-                                                                   : optx.connectedtoInternalMethodName) +
-                      "(" + (optx.interface.empty() || optx.interface == "-" || optx.hasargs == DHBW::no_argument ? ""
-                                                                                                                  : optx.interface) +
-                      "); }\n}";
+                      + (optx.connectedtoInternalMethodName == "-" ? ""
+                                                                   : optx.connectedtoInternalMethodName + "(")
+                      + (optx.connectedtoExternalMethodName == "-" || optx.connectedtoExternalMethodName.empty() ? ""
+                                                                                                                 :
+                         optx.connectedtoExternalMethodName + "(") +
+                      (optx.interface.empty() || optx.interface == "-" || optx.hasargs == DHBW::no_argument ? ""
+                                                                                                            : optx.interface) +
+                      (optx.connectedtoInternalMethodName == "-" ? ""
+                                                                 : ")") +
+                      (optx.connectedtoExternalMethodName == "-" || optx.connectedtoExternalMethodName.empty() ? ""
+                                                                                                               : ")") +
+                      "; }\n}";
 
         }
     }
@@ -202,8 +210,26 @@ void buildC(const DHBW::filedata &xmldata) {
 
             //internal printhelp methodbody
             if (optx.connectedtoInternalMethodName == "printhelp") {
+                c_code += "string helptextformatierung(string text, int signsperline) {\n"
+                          "    int space_count = 0;\n"
+                          "    bool check = false;\n"
+                          "    int count = -1;\n"
+                          "    for (int i = 0; i < text.length(); ++i) {\n"
+                          "        count++;\n"
+                          "        if (text[i] != ' ' && check) {\n"
+                          "            space_count++;\n"
+                          "        } else {\n"
+                          "            space_count = 0;\n"
+                          "            check = true;\n"
+                          "        }\n"
+                          "        if (count % signsperline == 0 && i != 0) {\n"
+                          "            text[i - space_count] = '\\n';\n"
+                          "            count = space_count;\n"
+                          "        }\n"
+                          "    }return text;\n"
+                          "}";
                 c_code += "void DHBW::abstractXMLparser::print" + optx.longOpt + "() {\n";
-                c_code += "printf(\"%s\"," + optx.interface + ".data());\n}";
+                c_code += "printf(\"%s\", helptextformatierung(helptext,signperline).data());\n}";
             } else if (optx.connectedtoInternalMethodName == "printversion") {
                 c_code += "void DHBW::abstractXMLparser::print" + optx.interface + "() {\n";
                 c_code += "printf(\"Your current Version is: %s\"," + optx.interface + ".data());\n}";
@@ -234,13 +260,21 @@ void buildC(const DHBW::filedata &xmldata) {
             //is set
             c_code += "bool " + xmldata.nameSpaceName + "::" + xmldata.classname + "::isSet" + optx.interface +
                       "() {\n"
-                      "    return !" +
-                      optx.interface + ".empty();\n}";
+                      "    return !(" +
+                      optx.interface;
+            if (optx.convertTo == "string") {
+                c_code += ".empty()";
+            } else if (optx.convertTo == "int") {
+                c_code += "!=" + ((optx.deafaultValue.empty()) ? "0" : optx.deafaultValue);
+            } else { c_code += ".empty()"; }
+
+            c_code += ");\n}";
         }
 
     }
 
-    write_data(c_code, path_c);
+    write_data(c_code, path_c
+    );
 }
 
 
@@ -288,7 +322,7 @@ void buildH(const DHBW::filedata &xmldata) {
             } else {
                 if (optx.convertTo == "string") { optx.convertTo = "std::string"; }
                 h_code += (optx.convertTo.empty() ? "void" : optx.convertTo) + " " + optx.interface;
-                if (optx.deafaultValue != "-" && !optx.deafaultValue.empty()) { h_code += optx.deafaultValue; }
+                if (optx.deafaultValue != "-" && !optx.deafaultValue.empty()) { h_code += "=" + optx.deafaultValue; }
                 h_code += ";\n";
             }
         }
@@ -305,6 +339,7 @@ void buildH(const DHBW::filedata &xmldata) {
         h_code += "//" + optx.description + "\n";
 
         //Methodendeklaration
+        if (optx.connectedtoInternalMethodName == "printhelp") { h_code += "protected:"; }
         if (optx.connectedtoInternalMethodName != "-") {
             h_code += "void " + optx.connectedtoInternalMethodName + "();" + "\n\n";
         }

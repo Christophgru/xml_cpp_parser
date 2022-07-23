@@ -99,6 +99,7 @@ private:
             else if(key == "ConnectToInternalMethod")options.connectedtoInternalMethodName = value;
             else if(key == "ConnectToExternalMethod")options.connectedtoExternalMethodName = value;
             else if(key == "Description")options.description = value;
+            else if(key == "DefaultValue")options.deafaultValue = value;
             else if(key == "interface")options.interface = value;
             else if(key == "convertTo")options.convertTo = value;
             else if(key == "HasArguments"){
